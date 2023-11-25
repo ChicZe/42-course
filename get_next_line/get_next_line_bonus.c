@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.c                                    :+:      :+:    :+:   */
+/*   get_next_line_bonus.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ciusca <cristianiusca13@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/13 19:26:10 by ciusca            #+#    #+#             */
-/*   Updated: 2023/11/16 21:28:13 by ciusca           ###   ########.fr       */
+/*   Created: 2023/11/16 20:50:04 by ciusca            #+#    #+#             */
+/*   Updated: 2023/11/16 21:24:18 by ciusca           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "get_next_line_bonus.h"
 
 char	*free_all(char *buffer, char *file)
 {
@@ -98,44 +98,25 @@ char	*find_line(char *file, int fd)
 
 char	*get_next_line(int fd)
 {
-	static char	*file;
+	static char	*file[1024];
 	char		*line;
 
 	if (fd < 0 || BUFFER_SIZE <= 0)
 		return (0);
-	file = find_line(file, fd);
-	if (!file)
+	file[fd] = find_line(file[fd], fd);
+	if (!file[fd])
 		return (NULL);
-	line = get_curr_line(file);
-	file = trim_first_line(file);
+	line = get_curr_line(file[fd]);
+	file[fd] = trim_first_line(file[fd]);
 	if (!*line)
 	{
-		if (file != NULL)
-			free(file);
-		file = NULL;
+		if (file[fd] != NULL)
+			free(file[fd]);
+		file[fd] = NULL;
 		free(line);
 		return (NULL);
 	}
-	if (!file)
+	if (!file[fd])
 		free(line);
 	return (line);
 }
-/*#include <fcntl.h>
-int	main(void)
-{
-	int		fd;
-	char	*next_line;
-	int		count;
-
-	count = 0;
-	fd = open("example1.txt", O_CREAT);
-	next_line = get_next_line(fd);
-	count++;
-	printf("[%d]:%s\n", count, next_line);
-	free(next_line);
-	next_line = get_next_line(fd);
-	printf("[2]:%s\n", next_line);
-	free(next_line);
-	close(fd);
-	return (0);
-}*/

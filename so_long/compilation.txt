@@ -1,0 +1,1 @@
+cc so_long.c mlx/libmlx.a -lXext -lX11 -lm

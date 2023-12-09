@@ -6,7 +6,7 @@
 /*   By: ciusca <ciusca@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/04 16:57:29 by ciusca            #+#    #+#             */
-/*   Updated: 2023/12/05 18:12:22 by ciusca           ###   ########.fr       */
+/*   Updated: 2023/12/08 17:40:14 by ciusca           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,22 +17,21 @@
 #include <stdio.h>
 #include <string.h>
 
-void	display_map(t_data *mlx, char **matrix, int count)
+void	display_map(t_data *mlx, char **matrix)
 {
 	int	cols;
 	int	rows;
 
 	cols = 0;
 	rows = 0;
-	/*while (cols < count)
+	//map parsing
+	while (matrix[cols])
 	{
 		while (matrix[cols][rows] != 0)
 			rows++;
-		printf("%s\n", matrix[cols]);
 		cols++;
-	}*/
-	//printf("cols = %d \n rows = %d", cols, rows);
-	mlx->win = mlx_new_window(mlx->mlx, 64 * 6, 64 * 6, "test");
+	}
+	mlx->win = mlx_new_window(mlx->mlx, 64 * rows, 64 * cols, "test");
 }
 
 void	populate_map(t_data *mlx)
@@ -46,22 +45,19 @@ void	populate_map(t_data *mlx)
 	fd = open("Maps/secondMap.ber", O_RDONLY);
 	if (fd == -1)
 		exit(0);
-	while (get_next_line(fd) != 0)
+	while (get_next_line(fd) != NULL)
 		i++;
-	matrix = malloc(sizeof(char) * i + 1);
-	matrix[i] = NULL;
+	matrix = calloc(i + 1, sizeof(char*));
+	//exit function
 	close(fd);
 	fd = open("Maps/secondMap.ber", O_RDONLY);
-	i--;
-	while (i >= 0)
+	while (--i >= 0)
 	{
 		line = get_next_line(fd);
-		line[strlen(line) - 1] = 0;
+		if (line[strlen(line) - 1] == '\n')
+			line[strlen(line) - 1] = 0;
 		matrix[i] = line;
-		//printf("%s\n", matrix[i]);
-		i--;
 	}
-	//printf("matrix 0 = %s \nmatrix last = %s", matrix[0], matrix[4]);
 	close(fd);
-	display_map(mlx, matrix, i);
+	display_map(mlx, matrix);
 }

@@ -1,5 +1,17 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   so_long.h                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ciusca <ciusca@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/12/08 18:47:40 by ciusca            #+#    #+#             */
+/*   Updated: 2023/12/08 18:48:44 by ciusca           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef SO_LONG_H
-#define SO_LONG_H
+# define SO_LONG_H
 
 typedef struct s_image
 {
@@ -10,12 +22,14 @@ typedef struct s_image
 	int		endian;
 }			t_image;
 
-typedef struct	s_data
+typedef struct s_data
 {
 
 	void	*mlx;
 	void	*win;
-	t_image	sprites[8];
+	t_image	sprites[9];
 }			t_data;
+
+void	create_img(t_data *mlx);
 
 #endif

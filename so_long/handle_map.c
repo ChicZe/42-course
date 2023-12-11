@@ -6,7 +6,7 @@
 /*   By: ciusca <ciusca@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/04 16:57:29 by ciusca            #+#    #+#             */
-/*   Updated: 2023/12/08 17:40:14 by ciusca           ###   ########.fr       */
+/*   Updated: 2023/12/09 18:57:37 by ciusca           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ void	populate_map(t_data *mlx)
 		exit(0);
 	while (get_next_line(fd) != NULL)
 		i++;
-	matrix = calloc(i + 1, sizeof(char*));
+	matrix = calloc(i + 1, sizeof(char *));
 	//exit function
 	close(fd);
 	fd = open("Maps/secondMap.ber", O_RDONLY);

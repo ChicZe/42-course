@@ -6,7 +6,7 @@
 /*   By: ciusca <ciusca@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/08 18:47:40 by ciusca            #+#    #+#             */
-/*   Updated: 2023/12/09 18:54:54 by ciusca           ###   ########.fr       */
+/*   Updated: 2023/12/19 16:20:03 by ciusca           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,14 +22,24 @@ typedef struct s_image
 	int		endian;
 }			t_image;
 
+typedef struct s_player
+{
+
+	int	x;
+	int	y;
+}			t_player;
+
 typedef struct s_data
 {
 
-	void	*mlx;
-	void	*win;
-	t_image	sprites[9];
+	void		*mlx;
+	void		*win;
+	char		**matrix;
+	t_image		sprites[9];
+	t_player	player_cor;
 }			t_data;
 
-void	create_img(t_data *mlx);
+void	initialize_imgs(t_data *mlx);
+void	player_movment(t_data *mlx, int horizontal, int vertical);
 
 #endif

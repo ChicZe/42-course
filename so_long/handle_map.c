@@ -6,7 +6,7 @@
 /*   By: ciusca <ciusca@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/04 16:57:29 by ciusca            #+#    #+#             */
-/*   Updated: 2023/12/19 16:34:58 by ciusca           ###   ########.fr       */
+/*   Updated: 2023/12/19 17:31:00 by ciusca           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,32 @@
 #include <fcntl.h>
 #include <stdio.h>
 #include <string.h>
+
+char	**reverse_matrix(t_data *mlx)
+{
+	int		i;
+	int		count;
+	char	*temp;
+
+	temp = calloc(sizeof(char *), strlen(mlx->matrix[i]) + 1);
+	if (!temp)
+		return (NULL);
+	count = 4;
+	i = 0;
+	while (mlx->matrix[count] != NULL)
+		count++;
+	//printf("matrix[0] = %s\n", mlx->matrix[0]);
+	while (i < count)
+	{
+		temp = mlx->matrix[i];
+		mlx->matrix[i] = mlx->matrix[count];
+		mlx->matrix[count] = temp;
+		i++;
+		count--;
+	}
+	//free(temp);
+	return (mlx->matrix);
+}
 
 void	put_image(t_data *mlx, int x, int y, int i)
 {
@@ -43,11 +69,11 @@ void	display_map(t_data *mlx)
 			else if (mlx->matrix[i][j] == '0')
 				put_image(mlx, i, j, 2);
 			else if (mlx->matrix[i][j] == 'P')
-				put_image(mlx, i, j, 2);
-			else if (mlx->matrix[i][j] == 'C')
 				put_image(mlx, i, j, 0);
+			else if (mlx->matrix[i][j] == 'C')
+				put_image(mlx, i, j, 4);
 			else if (mlx->matrix[i][j] == 'E')
-				put_image(mlx, i, j, 2);
+				put_image(mlx, i, j, 3);
 			j++;
 		}
 		j = 0;
@@ -98,5 +124,6 @@ void	populate_map(t_data *mlx)
 		mlx->matrix[i] = line;
 	}
 	close(fd);
+	mlx->matrix = reverse_matrix(mlx);
 	show_window(mlx);
 }

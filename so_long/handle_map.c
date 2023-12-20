@@ -6,7 +6,7 @@
 /*   By: ciusca <ciusca@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/04 16:57:29 by ciusca            #+#    #+#             */
-/*   Updated: 2023/12/19 17:31:00 by ciusca           ###   ########.fr       */
+/*   Updated: 2023/12/20 17:28:05 by ciusca           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,20 +17,21 @@
 #include <stdio.h>
 #include <string.h>
 
-char	**reverse_matrix(t_data *mlx)
+void	reverse_matrix(t_data *mlx)
 {
 	int		i;
 	int		count;
 	char	*temp;
 
+	printf("matrix = %s\n", mlx->matrix[0]);
 	temp = calloc(sizeof(char *), strlen(mlx->matrix[i]) + 1);
 	if (!temp)
-		return (NULL);
-	count = 4;
+		return ;
+	count = 0;
 	i = 0;
-	while (mlx->matrix[count] != NULL)
+	while (mlx->matrix[count])
 		count++;
-	//printf("matrix[0] = %s\n", mlx->matrix[0]);
+	count--;
 	while (i < count)
 	{
 		temp = mlx->matrix[i];
@@ -39,18 +40,6 @@ char	**reverse_matrix(t_data *mlx)
 		i++;
 		count--;
 	}
-	//free(temp);
-	return (mlx->matrix);
-}
-
-void	put_image(t_data *mlx, int x, int y, int i)
-{
-	int	h;
-	int	w;
-
-	h = x * 64;
-	w = y * 64;
-	mlx_put_image_to_window(mlx->mlx, mlx->win, mlx->sprites[i].img, w, h);
 }
 
 void	display_map(t_data *mlx)
@@ -71,9 +60,10 @@ void	display_map(t_data *mlx)
 			else if (mlx->matrix[i][j] == 'P')
 				put_image(mlx, i, j, 0);
 			else if (mlx->matrix[i][j] == 'C')
-				put_image(mlx, i, j, 4);
+				put_image(mlx, i, j, 5);
 			else if (mlx->matrix[i][j] == 'E')
 				put_image(mlx, i, j, 3);
+			display_enemies(mlx, i, j);
 			j++;
 		}
 		j = 0;
@@ -88,7 +78,7 @@ void	show_window(t_data *mlx)
 
 	cols = 0;
 	rows = 0;
-	//map parsing
+	map_parsing(mlx);
 	while (mlx->matrix[cols])
 	{
 		while (mlx->matrix[cols][rows] != 0)
@@ -112,7 +102,7 @@ void	populate_map(t_data *mlx)
 		exit(0);
 	while (get_next_line(fd) != NULL)
 		i++;
-	mlx->matrix = calloc(i + 1, sizeof(char *));
+	mlx->matrix = (char **)calloc(sizeof(char *), i + 1);
 	//exit function
 	close(fd);
 	fd = open("Maps/secondMap.ber", O_RDONLY);
@@ -124,6 +114,6 @@ void	populate_map(t_data *mlx)
 		mlx->matrix[i] = line;
 	}
 	close(fd);
-	mlx->matrix = reverse_matrix(mlx);
+	reverse_matrix(mlx);
 	show_window(mlx);
 }

@@ -6,18 +6,50 @@
 /*   By: ciusca <ciusca@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/16 19:17:40 by ciusca            #+#    #+#             */
-/*   Updated: 2023/12/19 16:47:06 by ciusca           ###   ########.fr       */
+/*   Updated: 2023/12/20 17:20:06 by ciusca           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "so_long.h"
+
+void	handle_collectable(t_data *mlx)
+{
+	int			i;
+	int			j;
+
+	i = -1;
+	while (mlx->matrix[++i] && mlx->player_cor.collected == 0)
+	{
+		j = -1;
+		while (mlx->matrix[i][++j])
+			if (mlx->matrix[i][j] == 'C')
+				mlx->player_cor.collectable++;
+	}
+	printf("collectable = %d\n", mlx->player_cor.collectable);
+	mlx->player_cor.collected += 1;
+	printf("collected = %d\n", mlx->player_cor.collected);
+	if (mlx->player_cor.collected == mlx->player_cor.collectable)
+		open_exit(mlx);
+}
+
 int	check_collide(t_data *mlx, int x, int y)
 {
+
 	if (mlx->matrix[x][y] == '1')
 		return (0);
 	else if (mlx->matrix[x][y] == 'E')
+	{
+		if (open_exit(mlx) == 1)
+			exit(0);
 		return (0);
+	}
 	else if (mlx->matrix[x][y] == 'C')
-		return (0);
+	{
+		handle_collectable(mlx);
+		mlx->matrix[x][y] = 'P';
+	}
+	else if (mlx->matrix[x][y] == 'W')
+		handle_enemies(mlx);
 	mlx->matrix[mlx->player_cor.x][mlx->player_cor.y] = '0';
 	return (1);
 }

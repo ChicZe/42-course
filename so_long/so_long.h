@@ -6,7 +6,7 @@
 /*   By: ciusca <ciusca@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/08 18:47:40 by ciusca            #+#    #+#             */
-/*   Updated: 2023/12/19 17:08:28 by ciusca           ###   ########.fr       */
+/*   Updated: 2023/12/20 17:36:25 by ciusca           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,10 @@ typedef struct s_image
 
 typedef struct s_player
 {
-	int	x;
-	int	y;
+	int			x;
+	int			y;
+	int			collected;
+	int			collectable;
 }			t_player;
 
 typedef struct s_data
@@ -39,5 +41,12 @@ typedef struct s_data
 
 void	initialize_imgs(t_data *mlx);
 void	player_movment(t_data *mlx, int horizontal, int vertical);
+void	put_image(t_data *mlx, int x, int y, int i);
+int		open_exit(t_data *mlx);
+void	show_text(t_data *mlx);
+void	display_enemies(t_data *mlx, int i, int j);
+void	handle_enemies(t_data *mlx);
+void	map_parsing(t_data *mlx);
+char	*ft_strchr(const char *s, int c);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: ciusca <ciusca@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 16:00:40 by ciusca            #+#    #+#             */
-/*   Updated: 2023/12/18 15:29:57 by ciusca           ###   ########.fr       */
+/*   Updated: 2023/12/20 17:28:38 by ciusca           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,9 @@
 #include "handle_map.c"
 #include "sprites_handle.c"
 #include "controls.c"
+#include "events.c"
+#include "bonus/enemies.c"
+#include "map_parsing.c"
 
 int	on_keydown(int key, t_data *img)
 {
@@ -41,10 +44,10 @@ int	on_keydown(int key, t_data *img)
 int	main(void)
 {
 	t_data	img;
-	int		fd;
 
 	img.mlx = mlx_init();
 	populate_map(&img);
+	show_text(&img);
 	mlx_key_hook(img.win, on_keydown, &img);
 	mlx_loop(img.mlx);
 }

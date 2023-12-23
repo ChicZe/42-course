@@ -6,11 +6,23 @@
 /*   By: ciusca <ciusca@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/20 15:06:44 by ciusca            #+#    #+#             */
-/*   Updated: 2023/12/20 17:10:09 by ciusca           ###   ########.fr       */
+/*   Updated: 2023/12/21 20:50:37 by ciusca           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
+
+void	flood_fill(char **map, int i, int j)
+{
+	if (i < 0 || j < 0 || j > 29 || i > 15)
+		return ;
+	if (map[i][j] == '0' || map[i][j] == 'C' || map[i][j] == 'E')
+		map[i][j] = 'F';
+	flood_fill(map, i + 1, j);
+	flood_fill(map, i - 1, j);
+	flood_fill(map, i, j + 1);
+	flood_fill(map, i, j - 1);
+}
 
 int	open_exit(t_data *mlx)
 {

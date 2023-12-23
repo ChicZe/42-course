@@ -6,7 +6,7 @@
 /*   By: ciusca <ciusca@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/08 18:47:40 by ciusca            #+#    #+#             */
-/*   Updated: 2023/12/20 17:36:25 by ciusca           ###   ########.fr       */
+/*   Updated: 2023/12/21 20:49:27 by ciusca           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,5 +48,6 @@ void	display_enemies(t_data *mlx, int i, int j);
 void	handle_enemies(t_data *mlx);
 void	map_parsing(t_data *mlx);
 char	*ft_strchr(const char *s, int c);
+void	flood_fill(char **map, int i, int j);
 
 #endif

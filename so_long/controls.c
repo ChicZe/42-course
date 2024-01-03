@@ -56,8 +56,6 @@ int	check_collide(t_data *mlx, int x, int y)
 
 void	find_player(t_data *mlx)
 {
-	int	x;
-	int	y;
 	int	i;
 	int	j;
 

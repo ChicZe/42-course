@@ -6,12 +6,14 @@
 /*   By: ciusca <ciusca@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/08 18:47:40 by ciusca            #+#    #+#             */
-/*   Updated: 2023/12/21 20:49:27 by ciusca           ###   ########.fr       */
+/*   Updated: 2023/12/28 15:00:58 by ciusca           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef SO_LONG_H
 # define SO_LONG_H
+
+#include <string.h>
 
 typedef struct s_image
 {
@@ -49,5 +51,8 @@ void	handle_enemies(t_data *mlx);
 void	map_parsing(t_data *mlx);
 char	*ft_strchr(const char *s, int c);
 void	flood_fill(char **map, int i, int j);
+void	find_player(t_data *mlx);
+char	**ft_matrix_dup(char **matrix);
+size_t	ft_len(const char *src);
 
 #endif

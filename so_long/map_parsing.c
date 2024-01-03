@@ -6,11 +6,27 @@
 /*   By: ciusca <ciusca@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/20 17:23:05 by ciusca            #+#    #+#             */
-/*   Updated: 2023/12/21 20:55:58 by ciusca           ###   ########.fr       */
+/*   Updated: 2024/01/02 14:16:27 by ciusca           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
+
+int	check_coins(char **temp)
+{
+	int	i;
+	int	j;
+
+	i = -1;
+	while (temp[++i])
+	{
+		j = -1;
+		while (temp[i][++j])
+			if (temp[i][j] == 'C')
+				return (1);
+	}
+	return (0);
+}
 
 void	check_path(t_data *mlx)
 {
@@ -19,24 +35,24 @@ void	check_path(t_data *mlx)
 	int		j;
 
 	i = -1;
-	temp = mlx->matrix;
-	//printf("temp = %s\n", temp[0]);
-	printf("x = %d -- y = %d\n", mlx->player_cor.x, mlx->player_cor.y);
-	flood_fill(temp, mlx->player_cor.x, mlx->player_cor.y);
-	/*while (temp[++i])
+	temp = ft_matrix_dup(mlx->matrix);
+	find_player(mlx);
+	flood_fill(temp, 4, 12);
+	while (temp[++i])
+		printf("temp = %s\n", temp[i]);
+	i = -1;
+	while (temp[++i])
 	{
 		j = -1;
 		while (temp[i][++j])
 		{
-			if (temp[i][j] == 'E')
+			if (temp[i][j] == 'E' || check_coins(temp) == 1)
 			{
-				printf("no valid path");
+				printf("no valid path!\n");
 				exit(0);
 			}
 		}
-	}*/
-	//while (temp[++i])
-	//	printf("%s\n", temp[i]);
+	}
 }
 
 void	check_walls(t_data *mlx)
@@ -71,7 +87,7 @@ void	check_elements(t_data *mlx)
 	int		i;
 	int		j;
 
-	elements = "C10WEP";
+	elements = "PC10WE";
 	i = -1;
 	while (mlx->matrix[++i])
 	{
@@ -84,9 +100,9 @@ void	check_elements(t_data *mlx)
 				exit(0);
 			}
 			else if (mlx->matrix[i][j] == 'P')
-				elements = "C10WE";
+				elements++;
 			else if (mlx->matrix[i][j] == 'E')
-				elements = "C10WP";
+				
 		}
 	}
 }

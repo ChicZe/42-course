@@ -1,1 +1,1 @@
-cc so_long.c mlx/libmlx.a -lXext -lX11 -lm
+cc main.c mlx/libmlx.a -lXext -lX11 -lm

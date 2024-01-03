@@ -6,22 +6,44 @@
 /*   By: ciusca <ciusca@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/20 15:06:44 by ciusca            #+#    #+#             */
-/*   Updated: 2023/12/21 20:50:37 by ciusca           ###   ########.fr       */
+/*   Updated: 2023/12/28 15:19:37 by ciusca           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-void	flood_fill(char **map, int i, int j)
+char	**ft_matrix_dup(char **matrix)
 {
-	if (i < 0 || j < 0 || j > 29 || i > 15)
+	int		i;
+	int		size;
+	char	**dup;
+
+	size = -1;
+	while (matrix[size])
+		size++;
+	dup = calloc(sizeof(char*), size + 1);
+	i = -1;
+	while (matrix[++i])
+		dup[i] = strdup(matrix[i]);
+	return (dup);
+}
+
+void	flood_fill(char **tab, int i, int j)
+{
+	if (i < 0 || j < 0 || i >= 5 || j >= 23)
 		return ;
-	if (map[i][j] == '0' || map[i][j] == 'C' || map[i][j] == 'E')
-		map[i][j] = 'F';
-	flood_fill(map, i + 1, j);
-	flood_fill(map, i - 1, j);
-	flood_fill(map, i, j + 1);
-	flood_fill(map, i, j - 1);
+	if (tab[i][j] == 'F' || tab[i][j] == '1' || tab[i][j] == 'W' )
+		return ;
+	if (tab[i][j] == 'E')
+	{
+		tab[i][j] = 'F';
+		return ;
+	}
+	tab[i][j] = 'F';
+	flood_fill(tab, i -1, j);
+	flood_fill(tab, i +1, j);
+	flood_fill(tab, i, j - 1);
+	flood_fill(tab, i, j + 1);
 }
 
 int	open_exit(t_data *mlx)
@@ -40,4 +62,14 @@ void	show_text(t_data *mlx)
 	//char *str = "ciao";
 	//mlx_set_font(mlx->mlx, mlx->win, "arial");
 	mlx_string_put(mlx->mlx, mlx->win, 20, 20, 120, "ciao");
+}
+
+size_t	ft_len(const char *src)
+{
+	size_t	i;
+
+	i = 0;
+	while (src[i])
+		i++;
+	return (i);
 }

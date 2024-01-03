@@ -6,7 +6,7 @@
 /*   By: ciusca <ciusca@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 16:00:40 by ciusca            #+#    #+#             */
-/*   Updated: 2023/12/20 17:28:38 by ciusca           ###   ########.fr       */
+/*   Updated: 2024/01/02 13:24:40 by ciusca           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,13 +41,20 @@ int	on_keydown(int key, t_data *img)
 	return (0);
 }
 
-int	main(void)
+int	main(int argc, char **argv)
 {
 	t_data	img;
+	char	*map_file;
+	int		fd;
 
+	if (argc != 2)
+	{
+		printf("invalid map argument\n");
+		return (0);
+	}
 	img.mlx = mlx_init();
-	populate_map(&img);
-	show_text(&img);
+	populate_map(&img, argv[1]);
+	//show_text(&img);
 	mlx_key_hook(img.win, on_keydown, &img);
 	mlx_loop(img.mlx);
 }

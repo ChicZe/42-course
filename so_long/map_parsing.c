@@ -6,7 +6,7 @@
 /*   By: ciusca <ciusca@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/20 17:23:05 by ciusca            #+#    #+#             */
-/*   Updated: 2024/01/02 14:16:27 by ciusca           ###   ########.fr       */
+/*   Updated: 2024/01/03 16:57:24 by ciusca           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,8 +38,6 @@ void	check_path(t_data *mlx)
 	temp = ft_matrix_dup(mlx->matrix);
 	find_player(mlx);
 	flood_fill(temp, 4, 12);
-	while (temp[++i])
-		printf("temp = %s\n", temp[i]);
 	i = -1;
 	while (temp[++i])
 	{
@@ -68,13 +66,13 @@ void	check_walls(t_data *mlx)
 		{
 			if ((i == 0 || i == 15) && mlx->matrix[i][j] != '1')
 			{
-				printf("invalid walls");
+				printf("invalid walls\n");
 				exit(0);
 			}
 			else if (mlx->matrix[i][0] != '1'
 					|| mlx->matrix[i][strlen(mlx->matrix[i]) - 1] != '1')
 			{
-				printf("invalid walls");
+				printf("invalid walls\n");
 				exit(0);
 			}
 		}
@@ -96,13 +94,13 @@ void	check_elements(t_data *mlx)
 		{
 			if (!ft_strchr(elements, mlx->matrix[i][j]))
 			{
-				printf("insert valid elements");
+				printf("insert valid elements\n");
 				exit(0);
 			}
 			else if (mlx->matrix[i][j] == 'P')
-				elements++;
+				elements = remove_char(elements, 'P');
 			else if (mlx->matrix[i][j] == 'E')
-				
+				elements = remove_char(elements, 'E');
 		}
 	}
 }
@@ -127,7 +125,7 @@ void	map_parsing(t_data *mlx)
 			count++;
 		if (line != count)
 		{
-			printf("the map is not regualar");
+			printf("the map is not regualar\n");
 			exit(0);
 		}
 	}

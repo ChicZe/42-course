@@ -6,7 +6,7 @@
 /*   By: ciusca <ciusca@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/04 16:57:29 by ciusca            #+#    #+#             */
-/*   Updated: 2023/12/28 18:04:06 by ciusca           ###   ########.fr       */
+/*   Updated: 2024/01/03 18:15:24 by ciusca           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 #include <stdio.h>
 #include <string.h>
 
-void	display_map(t_data *mlx)
+void	display_map(t_data *mlx, int index)
 {
 	int	i;
 	int	j;
@@ -29,11 +29,11 @@ void	display_map(t_data *mlx)
 		while (mlx->matrix[i][j] != 0)
 		{
 			if (mlx->matrix[i][j] == '1')
-				put_image(mlx, i, j, 1);
+				put_image(mlx, i, j, put_wall_image(mlx, i));
 			else if (mlx->matrix[i][j] == '0')
 				put_image(mlx, i, j, 2);
 			else if (mlx->matrix[i][j] == 'P')
-				put_image(mlx, i, j, 0);
+				put_image(mlx, i, j, index);
 			else if (mlx->matrix[i][j] == 'C')
 				put_image(mlx, i, j, 5);
 			else if (mlx->matrix[i][j] == 'E')
@@ -62,7 +62,7 @@ void	show_window(t_data *mlx)
 	}
 	mlx->win = mlx_new_window(mlx->mlx, 64 * rows, 64 * cols, "test");
 	initialize_imgs(mlx);
-	display_map(mlx);
+	display_map(mlx, 8);
 }
 
 void	reverse_matrix(t_data *mlx)
@@ -97,7 +97,6 @@ void	populate_map(t_data *mlx, char *map_file)
 	int		i;
 
 	i = 0;
-	printf("map file = %s\n", map_file);
 	fd = open(map_file, O_RDONLY);
 	if (fd == -1)
 		exit(0);

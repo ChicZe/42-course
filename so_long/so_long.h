@@ -6,7 +6,7 @@
 /*   By: ciusca <ciusca@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/08 18:47:40 by ciusca            #+#    #+#             */
-/*   Updated: 2023/12/28 15:00:58 by ciusca           ###   ########.fr       */
+/*   Updated: 2024/01/03 18:12:25 by ciusca           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ typedef struct s_player
 	int			y;
 	int			collected;
 	int			collectable;
+	int			index;
 }			t_player;
 
 typedef struct s_data
@@ -37,10 +38,12 @@ typedef struct s_data
 	void		*mlx;
 	void		*win;
 	char		**matrix;
-	t_image		sprites[9];
+	t_image		sprites[11];
 	t_player	player_cor;
 }			t_data;
 
+int		put_wall_image(t_data *mlx, int i);
+char	*remove_char(char *str, int c);
 void	initialize_imgs(t_data *mlx);
 void	player_movment(t_data *mlx, int horizontal, int vertical);
 void	put_image(t_data *mlx, int x, int y, int i);

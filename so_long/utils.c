@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   events.c                                           :+:      :+:    :+:   */
+/*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ciusca <ciusca@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/20 15:06:44 by ciusca            #+#    #+#             */
-/*   Updated: 2023/12/28 15:19:37 by ciusca           ###   ########.fr       */
+/*   Updated: 2024/01/11 20:12:07 by ciusca           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,19 +18,20 @@ char	**ft_matrix_dup(char **matrix)
 	int		size;
 	char	**dup;
 
-	size = -1;
+	size = 0;
 	while (matrix[size])
 		size++;
-	dup = calloc(sizeof(char*), size + 1);
+	dup = ft_calloc(sizeof(char *), size + 1);
 	i = -1;
 	while (matrix[++i])
 		dup[i] = strdup(matrix[i]);
 	return (dup);
 }
 
-void	flood_fill(char **tab, int i, int j)
+void	flood_fill(char **tab, int i, int j, t_data *mlx)
 {
-	if (i < 0 || j < 0 || i >= 5 || j >= 23)
+	if (i < 0 || j < 0 || i >= mlx->matrix_i - 1
+		|| j >= (int)ft_strlen(mlx->matrix[i]))
 		return ;
 	if (tab[i][j] == 'F' || tab[i][j] == '1' || tab[i][j] == 'W' )
 		return ;
@@ -40,36 +41,34 @@ void	flood_fill(char **tab, int i, int j)
 		return ;
 	}
 	tab[i][j] = 'F';
-	flood_fill(tab, i -1, j);
-	flood_fill(tab, i +1, j);
-	flood_fill(tab, i, j - 1);
-	flood_fill(tab, i, j + 1);
+	flood_fill(tab, i -1, j, mlx);
+	flood_fill(tab, i +1, j, mlx);
+	flood_fill(tab, i, j - 1, mlx);
+	flood_fill(tab, i, j + 1, mlx);
 }
 
-int	open_exit(t_data *mlx)
+int	open_exit(int collected, int collectable)
 {
-	if (mlx->player_cor.collected == mlx->player_cor.collectable
-		&& mlx->player_cor.collectable != 0)
-	{
-		/*   change the sprites to be "open"   */
+	if (collected == collectable && collectable != 0)
 		return (1);
-	}
 	return (0);
 }
 
-void	show_text(t_data *mlx)
+void	check_counters(t_data *mlx, int *counters)
 {
-	//char *str = "ciao";
-	//mlx_set_font(mlx->mlx, mlx->win, "arial");
-	mlx_string_put(mlx->mlx, mlx->win, 20, 20, 120, "ciao");
-}
-
-size_t	ft_len(const char *src)
-{
-	size_t	i;
-
-	i = 0;
-	while (src[i])
-		i++;
-	return (i);
+	if (counters[0] == 0 || counters[0] > 1)
+	{
+		ft_printf("invalid elements\n");
+		exit_function(mlx);
+	}
+	else if (counters[1] == 0 || counters[1] > 1)
+	{
+		ft_printf("invalid elements\n");
+		exit_function(mlx);
+	}
+	else if (counters[2] == 0)
+	{
+		ft_printf("invalid elements\n");
+		exit_function(mlx);
+	}
 }

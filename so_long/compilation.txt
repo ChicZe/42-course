@@ -1,1 +1,0 @@
-cc main.c mlx/libmlx.a -lXext -lX11 -lm

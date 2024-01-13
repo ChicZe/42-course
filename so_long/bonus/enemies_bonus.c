@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   enemies.c                                          :+:      :+:    :+:   */
+/*   enemies_bonus.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ciusca <ciusca@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/20 17:12:29 by ciusca            #+#    #+#             */
-/*   Updated: 2024/01/11 21:05:32 by ciusca           ###   ########.fr       */
+/*   Updated: 2024/01/12 18:15:42 by ciusca           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "so_long.h"
+#include "so_long_bonus.h"
 
 void	replace_enemies(t_data *mlx)
 {
@@ -89,12 +89,13 @@ void	display_enemies(t_data *mlx, int i, int j)
 		put_image(mlx, i, j, 4);
 }
 
-void	handle_enemies(t_data *mlx)
+int	handle_enemies(t_data *mlx)
 {
 	static int	health;
 
-	health++;
 	printf("you touched water!\n");
-	if (health == 2)
+	mlx->lives--;
+	if (mlx->lives == 0)
 		exit_function(mlx);
+	return (0);
 }

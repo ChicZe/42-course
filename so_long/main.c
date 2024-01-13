@@ -6,7 +6,7 @@
 /*   By: ciusca <ciusca@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 16:00:40 by ciusca            #+#    #+#             */
-/*   Updated: 2024/01/11 21:05:50 by ciusca           ###   ########.fr       */
+/*   Updated: 2024/01/12 19:07:22 by ciusca           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,6 @@ void	file_validation(char *str)
 int	on_keydown(int key, t_data *img)
 {
 	img->player_cor.index = 4;
-	ft_printf("key = %d\n", key);
 	if (key == 65307)
 		exit_function(img);
 	else if (key == 119)
@@ -57,7 +56,7 @@ int	main(int argc, char **argv)
 	img.mlx = mlx_init();
 	populate_map(&img, argv[1]);
 	if (!img.move)
-		display_moves(&img, 0);
+		display_moves(0);
 	mlx_key_hook(img.win, on_keydown, &img);
 	mlx_loop(img.mlx);
 }

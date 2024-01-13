@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   main_bonus.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ciusca <ciusca@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 16:00:40 by ciusca            #+#    #+#             */
-/*   Updated: 2024/01/11 21:05:50 by ciusca           ###   ########.fr       */
+/*   Updated: 2024/01/12 18:28:38 by ciusca           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "so_long.h"
+#include "so_long_bonus.h"
 
 void	file_validation(char *str)
 {
@@ -45,19 +45,22 @@ int	on_keydown(int key, t_data *img)
 
 int	main(int argc, char **argv)
 {
-	t_data	img;
+	t_data	mlx;
 
 	if (argc != 2)
 	{
 		ft_printf("invalid map argument\n");
 		return (0);
 	}
-	ft_bzero(&img, sizeof(img));
+	ft_bzero(&mlx, sizeof(mlx));
 	file_validation(argv[1]);
-	img.mlx = mlx_init();
-	populate_map(&img, argv[1]);
-	if (!img.move)
-		display_moves(&img, 0);
-	mlx_key_hook(img.win, on_keydown, &img);
-	mlx_loop(img.mlx);
+	mlx.mlx = mlx_init();
+	if (!mlx.lives)
+		mlx.lives = 2;
+	initialize_imgs(&mlx);
+	populate_map(&mlx, argv[1]);
+	if (!mlx.move)
+		display_moves(&mlx, 0);
+	mlx_key_hook(mlx.win, on_keydown, &mlx);
+	mlx_loop(mlx.mlx);
 }

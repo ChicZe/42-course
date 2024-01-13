@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   controls.c                                         :+:      :+:    :+:   */
+/*   controls_bonus.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ciusca <ciusca@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/16 19:17:40 by ciusca            #+#    #+#             */
-/*   Updated: 2024/01/11 21:05:31 by ciusca           ###   ########.fr       */
+/*   Updated: 2024/01/12 18:28:36 by ciusca           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "so_long.h"
+#include "so_long_bonus.h"
 
 int	change_sprites(int horizontal, int vertical)
 {
@@ -64,7 +64,7 @@ int	check_collide(t_data *mlx, int x, int y)
 		mlx->matrix[x][y] = 'P';
 	}
 	else if (mlx->matrix[x][y] == 'W')
-		handle_enemies(mlx);
+		return (handle_enemies(mlx));
 	mlx->matrix[mlx->player_cor.x][mlx->player_cor.y] = '0';
 	mlx->player_cor.player_moved = 1;
 	return (1);

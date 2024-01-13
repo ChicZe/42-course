@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   handle_map.c                                       :+:      :+:    :+:   */
+/*   handle_map_bonus.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ciusca <ciusca@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/04 16:57:29 by ciusca            #+#    #+#             */
-/*   Updated: 2024/01/11 21:05:33 by ciusca           ###   ########.fr       */
+/*   Updated: 2024/01/13 19:29:08 by ciusca           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "so_long.h"
+#include "so_long_bonus.h"
 
 void	display_map(t_data *mlx, int index)
 {
@@ -36,6 +36,7 @@ void	display_map(t_data *mlx, int index)
 			display_enemies(mlx, i, j);
 		}
 	}
+	handle_lives(mlx, i, j);
 }
 
 void	show_window(t_data *mlx)
@@ -45,7 +46,6 @@ void	show_window(t_data *mlx)
 
 	cols = 0;
 	rows = 0;
-	initialize_imgs(mlx);
 	while (mlx->matrix[cols])
 	{
 		while (mlx->matrix[cols][rows] != 0)
@@ -53,7 +53,6 @@ void	show_window(t_data *mlx)
 		cols++;
 	}
 	map_parsing(mlx);
-	mlx->matrix = trim_matrix(mlx);
 	mlx->win = mlx_new_window(mlx->mlx, 64 * rows, 64 * (cols + 0.5),
 			"so_long");
 	display_map(mlx, 8);

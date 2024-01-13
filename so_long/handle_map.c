@@ -6,7 +6,7 @@
 /*   By: ciusca <ciusca@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/04 16:57:29 by ciusca            #+#    #+#             */
-/*   Updated: 2024/01/11 21:05:33 by ciusca           ###   ########.fr       */
+/*   Updated: 2024/01/12 20:01:09 by ciusca           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,6 @@ void	display_map(t_data *mlx, int index)
 				put_image(mlx, i, j, 5);
 			else if (mlx->matrix[i][j] == 'E')
 				put_image(mlx, i, j, 3);
-			display_enemies(mlx, i, j);
 		}
 	}
 }
@@ -53,7 +52,7 @@ void	show_window(t_data *mlx)
 		cols++;
 	}
 	map_parsing(mlx);
-	mlx->matrix = trim_matrix(mlx);
+	//mlx->matrix = trim_matrix(mlx);
 	mlx->win = mlx_new_window(mlx->mlx, 64 * rows, 64 * (cols + 0.5),
 			"so_long");
 	display_map(mlx, 8);

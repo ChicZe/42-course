@@ -6,7 +6,7 @@
 /*   By: ciusca <ciusca@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/20 17:23:05 by ciusca            #+#    #+#             */
-/*   Updated: 2024/01/11 21:05:33 by ciusca           ###   ########.fr       */
+/*   Updated: 2024/01/12 17:07:45 by ciusca           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,7 +103,7 @@ void	check_elements(t_data *mlx)
 				counters[1]++;
 			else if (mlx->matrix[i][j] == 'C')
 				counters[2]++;
-			else if (!ft_strchr("10PCEW", mlx->matrix[i][j]))
+			else if (!ft_strchr("10PCE", mlx->matrix[i][j]))
 				(void)(ft_printf("invalid elements\n") + exit_function(mlx));
 		}
 	}

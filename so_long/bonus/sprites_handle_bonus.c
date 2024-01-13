@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   sprites_handle.c                                   :+:      :+:    :+:   */
+/*   sprites_handle_bonus.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ciusca <ciusca@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/16 16:56:42 by ciusca            #+#    #+#             */
-/*   Updated: 2024/01/09 19:27:15 by ciusca           ###   ########.fr       */
+/*   Updated: 2024/01/12 20:05:14 by ciusca           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "so_long.h"
+#include "so_long_bonus.h"
 
 void	put_image(t_data *mlx, int x, int y, int i)
 {
@@ -38,6 +38,8 @@ void	initialize_imgs_2(t_data *mlx, int width, int height)
 	mlx->sprites[9].img = mlx_xpm_file_to_image(mlx->mlx, "sprites/wall2.xpm",
 			&width, &height);
 	mlx->sprites[10].img = mlx_xpm_file_to_image(mlx->mlx, "sprites/wall3.xpm",
+			&width, &height);
+	mlx->sprites[11].img = mlx_xpm_file_to_image(mlx->mlx, "sprites/heart.xpm",
 			&width, &height);
 }
 

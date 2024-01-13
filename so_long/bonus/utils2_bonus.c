@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils2.c                                           :+:      :+:    :+:   */
+/*   utils2_bonus.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ciusca <ciusca@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 16:39:58 by ciusca            #+#    #+#             */
-/*   Updated: 2024/01/11 18:16:24 by ciusca           ###   ########.fr       */
+/*   Updated: 2024/01/12 19:57:16 by ciusca           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "so_long.h"
+#include "so_long_bonus.h"
 
 int	number_len(int n)
 {
@@ -47,14 +47,13 @@ int	exit_function(t_data *mlx)
 	i = -1;
 	if (mlx->win != NULL)
 		mlx_destroy_window(mlx->mlx, mlx->win);
-	while (++j < 11)
+	while (++j < 12)
 		mlx_destroy_image(mlx->mlx, mlx->sprites[j].img);
 	while (mlx->matrix[++i])
 		free(mlx->matrix[i]);
 	free(mlx->matrix);
 	mlx_destroy_display(mlx->mlx);
 	free(mlx->mlx);
-	//free(mlx->win);
 	exit(0);
 }
 
@@ -81,4 +80,14 @@ char	*remove_char(char *str, int c)
 	}
 	free(str);
 	return (dup);
+}
+void	handle_lives(t_data *mlx, int i, int j)
+{
+	if (mlx->lives == 2)
+	{
+		put_image(mlx, i - 1, j - 2, 11);
+		put_image(mlx, i - 1, j - 3, 11);
+	}
+	else
+		put_image(mlx, i - 1, j - 3, 11);
 }

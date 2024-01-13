@@ -5,6 +5,7 @@
 		"mlx.h": "c",
 		"*.a": "c",
 		"libft.h": "c",
-		"time.h": "c"
+		"time.h": "c",
+		"so_long_bonus.h": "c"
 	}
 }

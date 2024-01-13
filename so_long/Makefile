@@ -6,14 +6,17 @@
 #    By: ciusca <ciusca@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/12/01 13:51:20 by ciusca            #+#    #+#              #
-#    Updated: 2024/01/11 21:05:34 by ciusca           ###   ########.fr        #
+#    Updated: 2024/01/12 19:49:14 by ciusca           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = so_long
+NAME_BONUS = so_long_bonus
 
-SRCS = main.c map_parsing.c sprites_handle.c utils2.c controls.c utils.c handle_map.c enemies.c gui.c trim_matrix.c
+SRCS = main.c map_parsing.c sprites_handle.c utils2.c controls.c utils.c handle_map.c gui.c trim_matrix.c
+BONUS_SRCS = bonus/main_bonus.c bonus/map_parsing_bonus.c  bonus/sprites_handle_bonus.c bonus/utils2_bonus.c bonus/controls_bonus.c bonus/utils_bonus.c bonus/handle_map_bonus.c bonus/enemies_bonus.c bonus/gui_bonus.c bonus/trim_matrix_bonus.c
 
+BONUS_OBJS = ${BONUS_SRCS:.c=.o}
 OBJS = ${SRCS:.c=.o}
 
 MLX_PATH = mlx/
@@ -33,31 +36,33 @@ YELLOW = '\033[33m'
 GRAY = '\033[2;37m'
 CURSIVE = '\033[3m'
 
+
 all: $(NAME)
 
 $(NAME): $(OBJS)
-		make -C mlx/
-		make -C libft/
-		$(COMPILE) $(OBJS) $(MLX) $(LIBFT) $(MLX_INCLUDE) -o $(NAME)
-		@echo $(GREEN) "Compiled successfully! now just type ./so_long Maps/chose_a_map" $(NONE)
+	make -C mlx/
+	make -C libft/
+	$(COMPILE) $(OBJS) $(MLX) $(LIBFT) $(MLX_INCLUDE) -o $(NAME)
+	@echo $(GREEN) "Compiled successfully! Now just type ./so_long Maps/chose_a_map" $(NONE)
 
-$(OBJS): $(SRCS)
-		$(COMPILE) -c $(SRCS)
+bonus: $(NAME_BONUS)
 
-exe:
-		make -C ./ clean
-		@./$(NAME)
+$(NAME_BONUS): $(BONUS_OBJS)
+	make -C mlx/
+	make -C libft/
+	$(COMPILE) $(BONUS_OBJS) $(MLX) $(LIBFT) $(MLX_INCLUDE) -o $(NAME_BONUS)
+	@echo $(GREEN) "Compiled successfully! Now just type ./so_long_bonus Maps/chose_a_map" $(NONE)
 
 clean:
-		@rm -rf $(OBJS)
-		@make -C $(LIBFT_PATH) clean
-		@make -C $(MLX_PATH) clean
+	@rm -rf $(OBJS) $(BONUS_OBJS)
+	@make -C $(LIBFT_PATH) clean
+	@make -C $(MLX_PATH) clean
 
 fclean: clean
-		@rm -rf $(NAME)
-		@make -C $(LIBFT_PATH) clean
-		@make -C $(MLX_PATH) clean
+	@rm -rf $(NAME) $(NAME_BONUS)
+	@make -C $(LIBFT_PATH) fclean
+	@make -C $(MLX_PATH) clean
 
 re: fclean all
 
-.PHONY: all clean fclean
+.PHONY: all clean fclean re bonus

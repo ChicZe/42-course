@@ -6,7 +6,7 @@
 /*   By: ciusca <ciusca@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/08 18:47:40 by ciusca            #+#    #+#             */
-/*   Updated: 2024/01/11 21:05:31 by ciusca           ###   ########.fr       */
+/*   Updated: 2024/01/12 17:10:04 by ciusca           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ void	find_player(t_data *mlx);
 char	**ft_matrix_dup(char **matrix);
 size_t	ft_strlen(const char *src);
 int		exit_function(t_data *mlx);
-void	display_moves(t_data *mlx, int n_moves);
+void	display_moves(int n_moves);
 int		number_len(int n);
 
 #endif

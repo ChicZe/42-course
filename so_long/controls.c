@@ -6,7 +6,7 @@
 /*   By: ciusca <ciusca@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/16 19:17:40 by ciusca            #+#    #+#             */
-/*   Updated: 2024/01/11 21:05:31 by ciusca           ###   ########.fr       */
+/*   Updated: 2024/01/12 17:10:21 by ciusca           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,8 +63,6 @@ int	check_collide(t_data *mlx, int x, int y)
 		collected++;
 		mlx->matrix[x][y] = 'P';
 	}
-	else if (mlx->matrix[x][y] == 'W')
-		handle_enemies(mlx);
 	mlx->matrix[mlx->player_cor.x][mlx->player_cor.y] = '0';
 	mlx->player_cor.player_moved = 1;
 	return (1);
@@ -113,7 +111,6 @@ void	player_movment(t_data *mlx, int horizontal, int vertical)
 		move++;
 	mlx->player_cor.player_moved = 0;
 	mlx->move = move;
-	display_moves(mlx, move);
-	enemies_movment(mlx);
+	display_moves(move);
 	display_map(mlx, mlx->player_cor.index);
 }

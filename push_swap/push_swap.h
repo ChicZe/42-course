@@ -6,7 +6,7 @@
 /*   By: ciusca <ciusca@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 10:40:46 by ciusca            #+#    #+#             */
-/*   Updated: 2024/01/23 16:20:49 by ciusca           ###   ########.fr       */
+/*   Updated: 2024/01/26 15:43:11 by ciusca           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,6 @@ t_lst	*remove_first(t_lst *stk_a);
 t_lst	*create_stack(char **input);
 
 /* lis algorithm */
-void	get_arr(t_lst **stk_a);
+int		*get_arr(t_lst **stk_a);
 
 #endif

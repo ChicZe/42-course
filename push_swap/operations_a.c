@@ -6,7 +6,7 @@
 /*   By: ciusca <ciusca@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/21 19:31:01 by ciusca            #+#    #+#             */
-/*   Updated: 2024/01/22 20:44:08 by ciusca           ###   ########.fr       */
+/*   Updated: 2024/01/26 15:41:16 by ciusca           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,6 @@ void	sa(t_lst **stk_a)
 	*stk_a = temp2;
 	temp->next = temp2->next;
 	temp2->next = temp;
-	ft_printf("sa\n");
 }
 
 void	ra(t_lst **stk_a)
@@ -43,7 +42,6 @@ void	ra(t_lst **stk_a)
 	temp = ft_newnode(temp->content);
 	ft_add_back(stk_a, temp);
 	*stk_a = remove_first(*stk_a);
-	ft_printf("ra\n");
 }
 
 void	rra(t_lst **stk_a)
@@ -59,5 +57,4 @@ void	rra(t_lst **stk_a)
 	}
 	last->next = NULL;
 	ft_add_front(stk_a, temp);
-	ft_printf("rra\n");
 }

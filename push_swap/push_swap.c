@@ -6,7 +6,7 @@
 /*   By: ciusca <ciusca@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 10:37:06 by ciusca            #+#    #+#             */
-/*   Updated: 2024/01/23 16:21:02 by ciusca           ###   ########.fr       */
+/*   Updated: 2024/01/26 15:42:22 by ciusca           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,7 @@ int	main(int argc, char **argv)
 {
 	char	**input;
 	t_lst	*stack_a;
+	int		*lis;
 	//t_lst	*stack_b;
 
 	//stack_b = NULL;
@@ -67,6 +68,6 @@ int	main(int argc, char **argv)
 	//input parsing;
 	//lis_algo;
 	stack_a = create_stack(input);
-	get_arr(&stack_a);
+	lis = get_arr(&stack_a);
 	//print_list(stack_a);
 }

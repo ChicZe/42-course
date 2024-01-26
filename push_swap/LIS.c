@@ -6,75 +6,20 @@
 /*   By: ciusca <ciusca@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/23 16:06:26 by ciusca            #+#    #+#             */
-/*   Updated: 2024/01/24 21:02:14 by ciusca           ###   ########.fr       */
+/*   Updated: 2024/01/26 15:49:32 by ciusca           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-int	count_array(int *arr, int last)
+int	*printLIS(int arr[], int n)
 {
-	int	count;
-	int	i;
-
-	i = last - 1;
-	count = 1;
-	while (i >= 0)
-	{
-		if (arr[i] < arr[last])
-		{
-			last = i;
-			count++;
-		}
-		i--;
-	}
-	return (count);
-}
-
-/*int	*sort_lis(int *arr, int last)
-{
-	int	*sorted_arr;
-	int	i;
-	int	j;
-
-	//len = count_array(arr, last);
-	sorted_arr = malloc(sizeof(int) * 10);
-	if (!sorted_arr)
-		return (0);
-	j = 0;
-	i = last;
-	while (arr[j] != arr[last])
-	{
-		
-	}
-	return (sorted_arr);
-}*/
-
-/*int	check_biggest(int *arr, int n)
-{
-	int	i;
-	int	max;
-
-	max = 0;
-	i = 0;
-	while (i < n)
-	{
-		if (arr[i] > max)
-			max = i;
-		i++;
-	}
-	return (max);
-}*/
-
-int	*printLIS(int arr[], int n) {
-    int* lis = (int*)malloc(sizeof(int) * n + 1);
-    int* prev = (int*)malloc(sizeof(int) * n);
-
+    int* lis = (int*)malloc(sizeof(int) * n);
+    int* prev = (int*)malloc(sizeof(int) * n + 1);
     for (int i = 0; i < n; i++) {
         lis[i] = 1;
         prev[i] = -1;
     }
-
     int maxLength = 1;
     int endIndex = 0;
 
@@ -83,7 +28,6 @@ int	*printLIS(int arr[], int n) {
             if (arr[i] > arr[j] && lis[i] < lis[j] + 1) {
                 lis[i] = lis[j] + 1;
                 prev[i] = j;
-
                 if (lis[i] > maxLength) {
                     maxLength = lis[i];
                     endIndex = i;
@@ -91,20 +35,8 @@ int	*printLIS(int arr[], int n) {
             }
         }
     }
-
-    // Printing the LIS
 	prev[n] = endIndex;
 	return (prev);
-    /*printf("Longest Increasing Subsequence: \n");
-    while (i < n + 1) {
-		//ft_printf("end index = %d\n", endIndex);
-        printf("arr = %d\n", prev[i]);
-		i++;
-        //endIndex = prev[endIndex];
-    }
-
-    free(lis);
-    free(prev);*/
 }
 
 int	*rev_arr(int *arr, int n)
@@ -113,10 +45,11 @@ int	*rev_arr(int *arr, int n)
 	int	i;
 	int	j;
 
+	i = 0;
 	new = malloc(sizeof(int) * n);
 	if (!new)
 		return (NULL);
-	j = n -1;
+	j = n - 1;
 	while (i < n)
 	{
 		new[i] = arr[j];
@@ -134,7 +67,7 @@ int	*final_lis(int *arr, int *index, int n)
 	int	len;
 
 	len = 0;
-	last = arr[n - 1];
+	last = index[n - 1];
 	while (last != -1)
 	{
 		last = index[last];
@@ -143,19 +76,19 @@ int	*final_lis(int *arr, int *index, int n)
 	temp = malloc(sizeof(int) * len);
 	if (!temp)
 		return (NULL);
-	last = index[last];
+	last = index[n - 1];
 	i = 0;
-	while (last != -1)
+	while (last != -1 && i < len)
 	{
 		temp[i] = arr[last];
 		last = index[last];
 		i++;
 	}
-	rev_arr(temp, len);
+	temp = rev_arr(temp, i);
 	return (temp);
 }
 
-void	get_arr(t_lst **stk_a)
+int	*get_arr(t_lst **stk_a)
 {
 	int		*sa;
 	t_lst	*temp;
@@ -173,8 +106,8 @@ void	get_arr(t_lst **stk_a)
 		temp = temp->next;
 	}
 	prev = printLIS(sa, i);
-	sorted_arr = final_lis(sa, prev, i);
-	for(int i = 0; i < 5; i++)
-		ft_printf("sorted arr = %d\n", sorted_arr[i]);
-	// get final array
+	sorted_arr = final_lis(sa, prev, i + 1);
+	free(sa);
+	free(prev);
+	return (sorted_arr);
 }

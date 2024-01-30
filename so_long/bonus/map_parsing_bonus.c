@@ -6,7 +6,7 @@
 /*   By: ciusca <ciusca@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/20 17:23:05 by ciusca            #+#    #+#             */
-/*   Updated: 2024/01/12 18:28:38 by ciusca           ###   ########.fr       */
+/*   Updated: 2024/01/15 17:01:38 by ciusca           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ void	check_walls(t_data *mlx)
 		j = -1;
 		while (mlx->matrix[i][++j])
 		{
-			if ((i == 0 || i == 15) && mlx->matrix[i][j] != '1')
+			if ((i == 0 || i == mlx->matrix_i - 1) && mlx->matrix[i][j] != '1')
 			{
 				ft_printf("invalid walls\n");
 				exit_function(mlx);
@@ -83,7 +83,7 @@ void	check_walls(t_data *mlx)
 
 void	check_elements(t_data *mlx)
 {
-	int		counters[3];
+	int		counters[4];
 	int		i;
 	int		j;
 
@@ -91,7 +91,6 @@ void	check_elements(t_data *mlx)
 	counters[1] = 0;
 	counters[2] = 0;
 	i = -1;
-	mlx->matrix_j = 0;
 	while (mlx->matrix[++i])
 	{
 		j = -1;
@@ -107,6 +106,7 @@ void	check_elements(t_data *mlx)
 				(void)(ft_printf("invalid elements\n") + exit_function(mlx));
 		}
 	}
+	counters[3] = n_enemies(mlx);
 	check_counters(mlx, counters);
 }
 

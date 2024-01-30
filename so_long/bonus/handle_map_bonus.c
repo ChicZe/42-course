@@ -6,7 +6,7 @@
 /*   By: ciusca <ciusca@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/04 16:57:29 by ciusca            #+#    #+#             */
-/*   Updated: 2024/01/13 19:29:08 by ciusca           ###   ########.fr       */
+/*   Updated: 2024/01/18 09:57:06 by ciusca           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,23 +53,58 @@ void	show_window(t_data *mlx)
 		cols++;
 	}
 	map_parsing(mlx);
+	if (ft_strlen(mlx->matrix[0]) > 29)
+	{
+		ft_printf("map to big\n");
+		exit_function(mlx);
+	}
+	if (mlx->matrix_i > 15)
+	{
+		ft_printf("map to big\n");
+		exit_function(mlx);
+	}
 	mlx->win = mlx_new_window(mlx->mlx, 64 * rows, 64 * (cols + 0.5),
 			"so_long");
 	display_map(mlx, 8);
 }
 
-void	fill_matrix(t_data *mlx, char *line, int fd)
+void	trim_matrix(t_data *mlx)
 {
-	int	i;
+	char	*str;
+	int		i;
 
 	i = -1;
-	while (++i <= mlx->matrix_i)
+	while (mlx->matrix[++i])
+	{
+		str = ft_strtrim(mlx->matrix[i], "\n");
+		free(mlx->matrix[i]);
+		mlx->matrix[i] = ft_strdup(str);
+		free(str);
+	}
+}
+
+void	fill_matrix(t_data *mlx, char *line, int fd)
+{
+	int		i;
+
+	i = 0;
+	while (i < mlx->matrix_i)
 	{
 		line = get_next_line(fd);
-		if (line && line[ft_strlen(line) - 1] == '\n')
-			line[ft_strlen(line) - 1] = 0;
-		mlx->matrix[i] = line;
+		if (line && line[0] != 10)
+		{
+			mlx->matrix[i] = ft_strdup(line);
+			i++;
+		}
+		free(line);
 	}
+	line = get_next_line(fd);
+	while (line != NULL)
+	{
+		free(line);
+		line = get_next_line(fd);
+	}
+	trim_matrix(mlx);
 }
 
 void	populate_map(t_data *mlx, char *map_file)
@@ -78,22 +113,16 @@ void	populate_map(t_data *mlx, char *map_file)
 	int		fd;
 	int		len;
 
+	line = NULL;
 	len = 0;
 	fd = open(map_file, O_RDONLY);
 	if (fd == -1)
 		exit_function(mlx);
-	line = get_next_line(fd);
-	while (line != NULL)
-	{
-		free(line);
-		line = get_next_line(fd);
-		len ++;
-	}
+	len = map_len(map_file, fd);
 	mlx->matrix_i = len;
 	mlx->matrix = ft_calloc(sizeof(char *), mlx->matrix_i + 1);
 	if (!mlx->matrix)
 		return ;
-	close(fd);
 	fd = open(map_file, O_RDONLY);
 	fill_matrix(mlx, line, fd);
 	close(fd);

@@ -6,7 +6,7 @@
 /*   By: ciusca <ciusca@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/20 15:06:44 by ciusca            #+#    #+#             */
-/*   Updated: 2024/01/12 18:28:41 by ciusca           ###   ########.fr       */
+/*   Updated: 2024/01/15 16:54:00 by ciusca           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,4 +71,27 @@ void	check_counters(t_data *mlx, int *counters)
 		ft_printf("invalid elements\n");
 		exit_function(mlx);
 	}
+	if (counters[3] > 7)
+	{
+		ft_printf("to many enemies (dio bubu)\n");
+		exit_function(mlx);
+	}
+}
+
+int	n_enemies(t_data *mlx)
+{
+	int	i;
+	int	j;
+	int	count;
+
+	count = 0;
+	i = -1;
+	while (mlx->matrix[++i])
+	{
+		j = -1;
+		while (mlx->matrix[i][++j])
+			if (mlx->matrix[i][j] == 'W')
+				count++;
+	}
+	return (count);
 }

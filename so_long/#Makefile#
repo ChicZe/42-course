@@ -34,8 +34,7 @@ NONE = '\033[0m'
 GREEN = '\033[32m'
 YELLOW = '\033[33m'
 GRAY = '\033[2;37m'
-CURSIVE = '\033[3m'
-
+CURSIVE = '\033[3m
 
 all: $(NAME)
 

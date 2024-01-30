@@ -6,7 +6,7 @@
 /*   By: ciusca <ciusca@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 16:39:58 by ciusca            #+#    #+#             */
-/*   Updated: 2024/01/12 19:57:16 by ciusca           ###   ########.fr       */
+/*   Updated: 2024/01/15 17:25:45 by ciusca           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,30 +57,30 @@ int	exit_function(t_data *mlx)
 	exit(0);
 }
 
-char	*remove_char(char *str, int c)
+int	map_len(char *map_file, int fd)
 {
-	char	*dup;
-	int		i;
-	int		j;
+	char	*line;
+	int		len;
 
-	if (!str)
-		return (NULL);
-	dup = ft_calloc(sizeof(char *), ft_strlen(str));
-	if (!dup)
-		return (NULL);
-	i = -1;
-	j = 0;
-	while (str[++i])
+	len = 0;
+	fd = open(map_file, O_RDONLY);
+	line = "first";
+	while (line != NULL)
 	{
-		if (str[i] != c)
+		line = get_next_line(fd);
+		if (!line)
 		{
-			dup[j] = str[i];
-			j++;
+			free(line);
+			break ;
 		}
+		if (line[0] != 10)
+			len++;
+		free(line);
 	}
-	free(str);
-	return (dup);
+	close(fd);
+	return (len);
 }
+
 void	handle_lives(t_data *mlx, int i, int j)
 {
 	if (mlx->lives == 2)

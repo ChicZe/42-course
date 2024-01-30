@@ -6,7 +6,7 @@
 /*   By: ciusca <ciusca@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/08 18:47:40 by ciusca            #+#    #+#             */
-/*   Updated: 2024/01/12 17:10:04 by ciusca           ###   ########.fr       */
+/*   Updated: 2024/01/15 17:05:03 by ciusca           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,15 +50,14 @@ typedef struct s_data
 	t_player	player_cor;
 	int			move_happened;
 	int			move;
+	int			lives;
 }			t_data;
 
 void	check_counters(t_data *mlx, int *counters);
-char	**trim_matrix(t_data *mlx);
 void	enemies_movment(t_data *mlx);
 void	free_matrix(char **mat);
 int		put_wall_image(int i);
 void	display_map(t_data *mlx, int index);
-char	*remove_char(char *str, int c);
 void	initialize_imgs(t_data *mlx);
 void	player_movment(t_data *mlx, int horizontal, int vertical);
 void	put_image(t_data *mlx, int x, int y, int i);
@@ -76,5 +75,6 @@ size_t	ft_strlen(const char *src);
 int		exit_function(t_data *mlx);
 void	display_moves(int n_moves);
 int		number_len(int n);
+int		map_len(char *map_file, int fd);
 
 #endif

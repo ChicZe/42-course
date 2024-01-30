@@ -6,13 +6,13 @@
 /*   By: ciusca <ciusca@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 19:30:05 by ciusca            #+#    #+#             */
-/*   Updated: 2024/01/26 15:41:50 by ciusca           ###   ########.fr       */
+/*   Updated: 2024/01/29 19:44:47 by ciusca           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	sb(t_lst **stk_b)
+void	sb(t_lst **stk_b, int flag)
 {
 	t_lst	*temp;
 	t_lst	*temp2;
@@ -22,9 +22,11 @@ void	sb(t_lst **stk_b)
 	*stk_b = temp2;
 	temp->next = temp2->next;
 	temp2->next = temp;
+	if (flag == 1)
+		ft_printf("sb\n");
 }
 
-void	rb(t_lst **stk_b)
+void	rb(t_lst **stk_b, int flag)
 {
 	t_lst	*temp;
 
@@ -32,9 +34,11 @@ void	rb(t_lst **stk_b)
 	temp = ft_newnode(temp->content);
 	ft_add_back(stk_b, temp);
 	*stk_b = remove_first(*stk_b);
+	if (flag == 1)
+		ft_printf("rb\n");
 }
 
-void	rrb(t_lst **stk_b)
+void	rrb(t_lst **stk_b, int flag)
 {
 	t_lst	*temp;
 	t_lst	*last;
@@ -47,4 +51,6 @@ void	rrb(t_lst **stk_b)
 	}
 	last->next = NULL;
 	ft_add_front(stk_b, temp);
+	if (flag == 1)
+		ft_printf("rrb\n");
 }

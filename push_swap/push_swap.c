@@ -6,56 +6,52 @@
 /*   By: ciusca <ciusca@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 10:37:06 by ciusca            #+#    #+#             */
-/*   Updated: 2024/01/26 15:42:22 by ciusca           ###   ########.fr       */
+/*   Updated: 2024/01/29 19:50:08 by ciusca           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	print_stack(t_lst *sa, t_lst *sb)
+int	*fill_arr(t_arr *stack, t_lst *stack_a, t_lst *stack_b)
 {
-	t_lst	*temp1;
-	t_lst	*temp2;
+	int	*sa;
+	int	*sb;
+	int	*count_moves;
 
-	temp1 = sa;
-	temp2 = sb;
-	ft_printf("stack_a ---- stack_b\n");
-	while (temp1)
-	{
-		if (temp2)
-		{
-			ft_printf("sa =   %d ---- sb =    %d\n", temp1->content, temp2->content);
-			temp1 = temp1->next;
-			temp2 = temp1->next;
-		}
-		else
-		{
-			ft_printf("stack_a =   %d\n", temp1->content);
-			temp1 = temp1->next;
-		}
-	}
+	stack->a_len = ft_size(stack_a);
+	sa = list_to_array(stack_a);
+	if (!sa)
+		return (NULL);
+	stack->b_len = ft_size(stack_b);
+	sb = list_to_array(stack_b);
+	if (!sb)
+		return (NULL);
+	count_moves = count_a(stack, sa, sb);
+	free(sa);
+	free(sb);
+	return (count_moves);
 }
 
 void	print_list(t_lst *list)
 {
 	t_lst	*temp;
+	int		i;
 
+	i = 0;
 	temp = list;
 	while (temp)
 	{
 		ft_printf("data = %d\n", temp->content);
 		temp = temp->next;
+		i++;
 	}
+	ft_printf("stack a n = %d\n", i);
 }
 
 int	main(int argc, char **argv)
 {
 	char	**input;
-	t_lst	*stack_a;
-	int		*lis;
-	//t_lst	*stack_b;
 
-	//stack_b = NULL;
 	if (argc == 1)
 		return (0);
 	else if (argc == 2)
@@ -65,9 +61,6 @@ int	main(int argc, char **argv)
 	}
 	else
 		input = argv;
-	//input parsing;
-	//lis_algo;
-	stack_a = create_stack(input);
-	lis = get_arr(&stack_a);
-	//print_list(stack_a);
+	check_duplicates(input, argc);
+	init_sort(input);
 }

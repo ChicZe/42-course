@@ -6,36 +6,61 @@
 /*   By: ciusca <ciusca@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/23 16:06:26 by ciusca            #+#    #+#             */
-/*   Updated: 2024/01/26 15:49:32 by ciusca           ###   ########.fr       */
+/*   Updated: 2024/01/28 16:10:42 by ciusca           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-int	*printLIS(int arr[], int n)
+int	*fill_lis(int *arr, t_lis *utils, int *lis, int *prev)
 {
-    int* lis = (int*)malloc(sizeof(int) * n);
-    int* prev = (int*)malloc(sizeof(int) * n + 1);
-    for (int i = 0; i < n; i++) {
-        lis[i] = 1;
-        prev[i] = -1;
-    }
-    int maxLength = 1;
-    int endIndex = 0;
+	int	i;
+	int	j;
 
-    for (int i = 1; i < n; i++) {
-        for (int j = 0; j < i; j++) {
-            if (arr[i] > arr[j] && lis[i] < lis[j] + 1) {
-                lis[i] = lis[j] + 1;
-                prev[i] = j;
-                if (lis[i] > maxLength) {
-                    maxLength = lis[i];
-                    endIndex = i;
-                }
-            }
-        }
-    }
-	prev[n] = endIndex;
+	i = -1;
+	while (++i < utils->n)
+	{
+		j = -1;
+		while (++j < i)
+		{
+			if (arr[i] > arr[j] && lis[i] < lis[j] + 1)
+			{
+				lis[i] = lis[j] + 1;
+				prev[i] = j;
+				if (lis[i] > utils->max_length)
+				{
+					utils->max_length = lis[i];
+					utils->end_index = i;
+				}
+			}
+		}
+	}
+	prev[utils->n] = utils->end_index;
+	return (prev);
+}
+
+int	*ft_lis(int arr[], int n, t_lis *utils)
+{
+	int	*prev;
+	int	*lis;
+	int	i;
+
+	utils->max_length = -1;
+	utils->end_index = 0;
+	utils->n = n;
+	lis = (int *)malloc(sizeof(int) * n);
+	if (!lis)
+		return (NULL);
+	prev = (int *)malloc(sizeof(int) * n + 1);
+	if (!prev)
+		return (NULL);
+	i = -1;
+	while (++i < n)
+	{
+		lis[i] = 1;
+		prev[i] = -1;
+	}
+	prev = fill_lis(arr, utils, lis, prev);
 	return (prev);
 }
 
@@ -59,7 +84,7 @@ int	*rev_arr(int *arr, int n)
 	return (new);
 }
 
-int	*final_lis(int *arr, int *index, int n)
+int	*final_lis(int *arr, int *index, int n, t_lis *lis_arr)
 {
 	int	i;
 	int	last;
@@ -77,18 +102,18 @@ int	*final_lis(int *arr, int *index, int n)
 	if (!temp)
 		return (NULL);
 	last = index[n - 1];
-	i = 0;
-	while (last != -1 && i < len)
+	i = -1;
+	while (last != -1 && ++i < len)
 	{
 		temp[i] = arr[last];
 		last = index[last];
-		i++;
 	}
-	temp = rev_arr(temp, i);
+	temp = rev_arr(temp, len);
+	lis_arr->n = len;
 	return (temp);
 }
 
-int	*get_arr(t_lst **stk_a)
+void	get_arr(t_lst **stk_a, t_lis *lis_arr)
 {
 	int		*sa;
 	t_lst	*temp;
@@ -105,9 +130,7 @@ int	*get_arr(t_lst **stk_a)
 		i++;
 		temp = temp->next;
 	}
-	prev = printLIS(sa, i);
-	sorted_arr = final_lis(sa, prev, i + 1);
-	free(sa);
-	free(prev);
-	return (sorted_arr);
+	prev = ft_lis(sa, i, lis_arr);
+	sorted_arr = final_lis(sa, prev, i + 1, lis_arr);
+	lis_arr->lis = sorted_arr;
 }

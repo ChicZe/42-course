@@ -6,7 +6,7 @@
 /*   By: ciusca <ciusca@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/21 16:40:07 by ciusca            #+#    #+#             */
-/*   Updated: 2024/01/23 16:17:07 by ciusca           ###   ########.fr       */
+/*   Updated: 2024/01/28 18:59:08 by ciusca           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,17 +79,3 @@ t_lst	*create_stack(char **input)
 	return (stack_a);
 }
 
-int	ft_size(t_lst *lst)
-{
-	int	n;
-
-	if (lst == NULL)
-		return (0);
-	n = 1;
-	while (lst->next != NULL)
-	{
-		lst = lst->next;
-		n++;
-	}
-	return (n);
-}

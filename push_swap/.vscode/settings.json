@@ -3,6 +3,7 @@
 		"*.a": "c",
 		"libft.h": "c",
 		"list_functions": "c",
-		"push_swap.h": "c"
+		"push_swap.h": "c",
+		"limits": "c"
 	}
 }

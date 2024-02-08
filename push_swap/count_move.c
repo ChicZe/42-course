@@ -6,7 +6,7 @@
 /*   By: ciusca <ciusca@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/28 16:46:19 by ciusca            #+#    #+#             */
-/*   Updated: 2024/01/29 16:38:28 by ciusca           ###   ########.fr       */
+/*   Updated: 2024/02/08 13:04:02 by ciusca           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,7 @@ int	*count_a(t_arr *stack, int *sa, int *sb)
 	{
 		j = -1;
 		while (++j < stack->a_len)
+		{
 			if (sb[i] < sa[j])
 			{
 				j = find_pos(stack->a_len, j);
@@ -82,6 +83,7 @@ int	*count_a(t_arr *stack, int *sa, int *sb)
 			}
 			else if (j + 1 == stack->a_len)
 				count_a[i] = 0;
+		}
 	}
 	return (count_a);
 }

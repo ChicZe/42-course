@@ -6,17 +6,14 @@
 /*   By: ciusca <ciusca@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/28 15:11:04 by ciusca            #+#    #+#             */
-/*   Updated: 2024/01/30 17:52:08 by ciusca           ###   ########.fr       */
+/*   Updated: 2024/02/08 12:31:14 by ciusca           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	make_moves(t_lst *sa, t_lst *sb, int index, int **moves)
+void	make_moves(t_lst **sa, t_lst **sb, int index, int **moves)
 {
-	int	i;
-
-	i = -1;
 	if (moves[0][index] >= 0 && moves[1][index] >= 0)
 		pos_pos(moves, index, sa, sb);
 	else if (moves[0][index] < 0 && moves[1][index] >= 0)
@@ -48,50 +45,59 @@ int	chose_move(int **moves, int n)
 	return (i);
 }
 
-void	ft_sorting(t_lst **stack_a, t_lst **stack_b, t_arr *stack)
+void	ft_sorting(t_lst *stack_a, t_lst *stack_b, t_arr *stack)
 {
 	int	*moves[2];
 	int	i;
 	int	move_index;
 	int	end;
 
-	end = ft_size(*stack_b);
+	end = ft_size(stack_b);
 	i = -1;
-	while (++i < end)
+	while (++i < end -1)
 	{
-		moves[0] = fill_arr(stack, *stack_a, *stack_b);
-		moves[1] = count_b(*stack_b);
-		move_index = chose_move(moves, ft_size(*stack_b));
-		ft_printf("\n size = %d\n", ft_size(*stack_a));
-		ft_printf("\n\n --- stack a ---\n");
-			print_list(*stack_a);
-		//make_moves(*stack_a, *stack_b, move_index, moves);
-		free(moves[0]);
-		free(moves[1]);
-		pa(stack_a, stack_b);
-		restore_stack(stack_a, stack_b);
+		ft_printf("-- first stack a ---\n");
+		print_list(stack_a);
+		ft_printf("-- stack b ---\n");
+		print_list(stack_b);
+		moves[0] = fill_arr(stack, stack_a, stack_b);
+		moves[1] = count_b(stack_b);
+		move_index = chose_move(moves, ft_size(stack_b));
+		//ft_printf("index = %d move a = %d, move b = %d\n", move_index, moves[0][0], moves[1][0]);
+		make_moves(&stack_a, &stack_b, move_index, moves);
+		//free(moves[0]);
+		//free(moves[1]);
+		ft_printf("--  move stack a ---\n");
+		print_list(stack_a);
+		pa(&stack_a, &stack_b);
+		ft_printf("-- push stack a ---\n");
+		print_list(stack_a);
+		//restore_stack(&stack_a);
+		ft_printf("-- final stack a ---\n");
+		print_list(stack_a);
 	}
+	printf("\n--- stack a ---\n");
+	print_list(stack_a);
 }
 
-void	push_lis(t_lst **stk_a, t_lst **stk_b, int *lis, int n)
+t_lst	*push_lis(t_lst *stk_a, t_lst **stk_b, int *lis, int n)
 {
 	int		i;
-	t_lst	*temp;
 
-	temp = *stk_a;
 	i = 0;
 	while (i < n)
 	{
-		if (lis[i] == temp->content)
+		if (lis[i] == stk_a->content)
 		{
-			ra(&temp, 1);
+			ra(&stk_a, 1);
 			i++;
 		}
 		else
-			pb(&temp, stk_b);
+			pb(&stk_a, stk_b);
 	}
-	while (temp->content != lis[0])
-		pb(&temp, stk_b);
+	while (stk_a->content != lis[0])
+		pb(&stk_a, stk_b);
+	return (stk_a);
 }
 
 void	init_sort(char **input)
@@ -104,8 +110,8 @@ void	init_sort(char **input)
 	stack_b = NULL;
 	stack_a = create_stack(input);
 	get_arr(&stack_a, &lis_arr);
-	push_lis(&stack_a, &stack_b, lis_arr.lis, lis_arr.n);
-	ft_sorting(&stack_a, &stack_b, &stack);
+	stack_a = push_lis(stack_a, &stack_b, lis_arr.lis, lis_arr.n);
+	ft_sorting(stack_a, stack_b, &stack);
 	//move_b = count_b(stack_b);
 	//move_a = fill_arr(&stack, stack_a, stack_b);
 	//print_list(stack_a);

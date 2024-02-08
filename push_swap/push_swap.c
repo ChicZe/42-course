@@ -6,7 +6,7 @@
 /*   By: ciusca <ciusca@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 10:37:06 by ciusca            #+#    #+#             */
-/*   Updated: 2024/01/29 19:50:08 by ciusca           ###   ########.fr       */
+/*   Updated: 2024/02/01 18:54:08 by ciusca           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ void	print_list(t_lst *list)
 		temp = temp->next;
 		i++;
 	}
-	ft_printf("stack a n = %d\n", i);
+	ft_printf("stack n = %d\n", i);
 }
 
 int	main(int argc, char **argv)

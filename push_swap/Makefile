@@ -6,13 +6,13 @@
 #    By: ciusca <ciusca@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/01/18 10:41:26 by ciusca            #+#    #+#              #
-#    Updated: 2024/01/29 18:16:55 by ciusca           ###   ########.fr        #
+#    Updated: 2024/02/01 17:37:22 by ciusca           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = push_swap
 
-SRCS = push_swap.c test.c list_functions.c list_functions2.c operations_a.c operations_b.c operations_ab.c LIS.c parsing.c sorting.c count_move.c sorting_utils.c
+SRCS = push_swap.c test.c list_functions.c list_functions2.c operations_a.c operations_b.c operations_ab.c LIS.c parsing.c sorting.c count_move.c sorting_utils.c move.c
 OBJS = ${SRCS:.c=.o}
 
 LIBFT_PATH = libft/

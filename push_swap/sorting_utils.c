@@ -6,7 +6,7 @@
 /*   By: ciusca <ciusca@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/29 18:13:49 by ciusca            #+#    #+#             */
-/*   Updated: 2024/01/29 18:15:11 by ciusca           ###   ########.fr       */
+/*   Updated: 2024/02/01 18:22:04 by ciusca           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ int	find_smallest(int *arr, int n)
 
 	min = arr[0];
 	i = -1;
-	while (++i < n)
+	while (++i < n - 1)
 	{
 		if (min < arr[i])
 			min = arr[i];

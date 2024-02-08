@@ -6,7 +6,7 @@
 /*   By: ciusca <ciusca@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/21 19:31:01 by ciusca            #+#    #+#             */
-/*   Updated: 2024/01/29 18:41:50 by ciusca           ###   ########.fr       */
+/*   Updated: 2024/02/01 20:52:20 by ciusca           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,7 @@ void	rra(t_lst **stk_a, int flag)
 {
 	t_lst	*temp;
 	t_lst	*last;
+	t_lst	*new;
 
 	temp = *stk_a;
 	while (temp->next != NULL)
@@ -59,8 +60,9 @@ void	rra(t_lst **stk_a, int flag)
 		last = temp;
 		temp = temp->next;
 	}
+	new = ft_newnode(temp->content);
 	last->next = NULL;
-	ft_add_front(stk_a, temp);
+	ft_add_front(stk_a, new);
 	if (flag == 1)
 		ft_printf("rra\n");
 }

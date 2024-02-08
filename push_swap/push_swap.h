@@ -6,7 +6,7 @@
 /*   By: ciusca <ciusca@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 10:40:46 by ciusca            #+#    #+#             */
-/*   Updated: 2024/01/29 18:44:59 by ciusca           ###   ########.fr       */
+/*   Updated: 2024/02/01 18:40:20 by ciusca           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,11 @@ typedef struct s_lis
 	int		max_length;
 }				t_lis;
 
-
+/* move cases*/
+void	pos_pos(int **moves, int index, t_lst **sa, t_lst **sb);
+void	neg_pos(int **moves, int index, t_lst **sa, t_lst **sb);
+void	neg_neg(int **moves, int index, t_lst **sa, t_lst **sb);
+void	restore_stack(t_lst **sa);
 
 /* matrix functions */
 char	**matrix_join(char *string, char **mat);

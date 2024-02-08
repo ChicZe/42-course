@@ -6,7 +6,7 @@
 /*   By: ciusca <ciusca@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/30 14:36:09 by ciusca            #+#    #+#             */
-/*   Updated: 2024/02/08 12:57:15 by ciusca           ###   ########.fr       */
+/*   Updated: 2024/02/08 17:32:41 by ciusca           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	pos_pos(int **moves, int index, t_lst **sa, t_lst **sb)
 	int	b;
 	int min;
 
-	ft_printf("--- pos pos ---\n");
+	//ft_printf("--- pos pos ---\n");
 	i = -1;
 	a = moves[0][index];
 	b = moves[1][index];
@@ -37,7 +37,7 @@ void	pos_pos(int **moves, int index, t_lst **sa, t_lst **sb)
 		rb(sb, 1);
 		b--;
 	}
-	ft_printf("--- end ---\n");
+	//ft_printf("--- end ---\n");
 }
 
 void	neg_pos(int **moves, int index, t_lst **sa, t_lst **sb)
@@ -45,7 +45,7 @@ void	neg_pos(int **moves, int index, t_lst **sa, t_lst **sb)
 	int	a;
 	int	b;
 
-	ft_printf("--- neg pos ---\n");
+	//ft_printf("--- neg pos ---\n");
 	a = moves[0][index];
 	b = moves[1][index];
 	//ft_printf("a = %d -- b = %d\n", a, b);
@@ -66,7 +66,7 @@ void	neg_pos(int **moves, int index, t_lst **sa, t_lst **sb)
 		while (--a >= 0)
 			ra(sa, 1);
 	}
-	ft_printf("--- end ---\n");
+	//ft_printf("--- end ---\n");
 }
 
 void	neg_neg(int **moves, int index, t_lst **sa, t_lst **sb)
@@ -76,7 +76,7 @@ void	neg_neg(int **moves, int index, t_lst **sa, t_lst **sb)
 	int	b;
 	int max;
 
-	ft_printf("--- neg neg ---\n");
+	//ft_printf("--- neg neg ---\n");
 	i = 1;
 	a = moves[0][index];
 	b = moves[1][index];
@@ -94,7 +94,7 @@ void	neg_neg(int **moves, int index, t_lst **sa, t_lst **sb)
 		rrb(sb, 1);
 		b++;
 	}
-	ft_printf("--- end ---\n");
+	//ft_printf("--- end ---\n");
 }
 
 void	restore_stack(t_lst **sa)
@@ -104,7 +104,7 @@ void	restore_stack(t_lst **sa)
 	int		count;
 	int		i;
 
-	ft_printf("--- restore stack ---\n");
+	//ft_printf("--- restore stack ---\n");
 	i = 0;
 	count = 1;
 	temp = *sa;
@@ -118,8 +118,8 @@ void	restore_stack(t_lst **sa)
 		temp = temp->next;
 		i++;
 	}
-	ft_printf("count = %d\n", count);
-	ft_printf("size = %d\n", size - count);
+	//ft_printf("count = %d\n", count);
+	//ft_printf("size = %d\n", size - count);
 	if (i <= size / 2)
 	{
 		i = -1;
@@ -132,5 +132,5 @@ void	restore_stack(t_lst **sa)
 		while (--i > size / 2)
 			rra(sa, 1);
 	}
-	ft_printf("--- end ---\n");
+	//ft_printf("--- end ---\n");
 }

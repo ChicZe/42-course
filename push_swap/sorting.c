@@ -6,7 +6,7 @@
 /*   By: ciusca <ciusca@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/28 15:11:04 by ciusca            #+#    #+#             */
-/*   Updated: 2024/02/08 12:31:14 by ciusca           ###   ########.fr       */
+/*   Updated: 2024/02/08 18:09:24 by ciusca           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,30 +54,28 @@ void	ft_sorting(t_lst *stack_a, t_lst *stack_b, t_arr *stack)
 
 	end = ft_size(stack_b);
 	i = -1;
-	while (++i < end -1)
+	while (++i < end)
 	{
-		ft_printf("-- first stack a ---\n");
-		print_list(stack_a);
-		ft_printf("-- stack b ---\n");
-		print_list(stack_b);
+		//ft_printf("-- first stack a ---\n");
+		//print_list(stack_a);
+		//ft_printf("-- stack b ---\n");
+		//print_list(stack_b);
 		moves[0] = fill_arr(stack, stack_a, stack_b);
 		moves[1] = count_b(stack_b);
 		move_index = chose_move(moves, ft_size(stack_b));
 		//ft_printf("index = %d move a = %d, move b = %d\n", move_index, moves[0][0], moves[1][0]);
 		make_moves(&stack_a, &stack_b, move_index, moves);
-		//free(moves[0]);
-		//free(moves[1]);
-		ft_printf("--  move stack a ---\n");
-		print_list(stack_a);
+		free(moves[0]);
+		free(moves[1]);
+		//ft_printf("--  move stack a ---\n");
+		//print_list(stack_a);
 		pa(&stack_a, &stack_b);
-		ft_printf("-- push stack a ---\n");
-		print_list(stack_a);
+		//ft_printf("-- push stack a ---\n");
+		//print_list(stack_a);
 		//restore_stack(&stack_a);
-		ft_printf("-- final stack a ---\n");
-		print_list(stack_a);
+		//ft_printf("-- final stack a ---\n");
+		//print_list(stack_a);
 	}
-	printf("\n--- stack a ---\n");
-	print_list(stack_a);
 }
 
 t_lst	*push_lis(t_lst *stk_a, t_lst **stk_b, int *lis, int n)

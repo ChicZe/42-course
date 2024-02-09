@@ -6,7 +6,7 @@
 /*   By: ciusca <ciusca@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 10:37:06 by ciusca            #+#    #+#             */
-/*   Updated: 2024/02/01 18:54:08 by ciusca           ###   ########.fr       */
+/*   Updated: 2024/02/09 19:38:37 by ciusca           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,8 @@ int	main(int argc, char **argv)
 	}
 	else
 		input = argv;
-	check_duplicates(input, argc);
+	argc = matrix_len(input);
+	ft_printf("argc = %d\n", argc);
+	check_invalid(input, argc);
 	init_sort(input);
 }

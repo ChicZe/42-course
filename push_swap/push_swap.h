@@ -6,7 +6,7 @@
 /*   By: ciusca <ciusca@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 10:40:46 by ciusca            #+#    #+#             */
-/*   Updated: 2024/02/01 18:40:20 by ciusca           ###   ########.fr       */
+/*   Updated: 2024/02/09 19:00:27 by ciusca           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ char	**matrix_join(char *string, char **mat);
 int		matrix_len(char **mat);
 
 /* parsing */
-void	check_duplicates(char **input, int argc);
+void	check_invalid(char **input, int argc);
 
 /* stack operations */
 void	sa(t_lst **stk_a, int flag);
@@ -74,9 +74,12 @@ int		*list_to_array(t_lst *list);
 
 /* utils */
 int		*fill_arr(t_arr *stack, t_lst *stack_a, t_lst *stack_b);
-int		ft_min(int a , int b);
+int		ft_min(int a, int b);
 int		ft_max(int a, int b);
 int		find_smallest(int *arr, int n);
+int		find_bigger(int n, int *arr, int target);
+int		find_min(int *arr, int n);
+int		count_bigger(int target, int *arr, int n);
 
 /* lis algorithm */
 void	get_arr(t_lst **stk_a, t_lis *lis_arr);

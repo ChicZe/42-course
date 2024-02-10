@@ -6,7 +6,7 @@
 /*   By: ciusca <ciusca@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 10:37:06 by ciusca            #+#    #+#             */
-/*   Updated: 2024/02/09 19:38:37 by ciusca           ###   ########.fr       */
+/*   Updated: 2024/02/10 18:55:36 by ciusca           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,12 +57,13 @@ int	main(int argc, char **argv)
 	else if (argc == 2)
 	{
 		input = ft_split(argv[1], 32);
+		if (!input)
+			return (0);
 		input = matrix_join(argv[0], input);
 	}
 	else
 		input = argv;
 	argc = matrix_len(input);
-	ft_printf("argc = %d\n", argc);
 	check_invalid(input, argc);
 	init_sort(input);
 }

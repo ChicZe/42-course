@@ -6,7 +6,7 @@
 /*   By: ciusca <ciusca@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 19:30:05 by ciusca            #+#    #+#             */
-/*   Updated: 2024/02/01 20:55:21 by ciusca           ###   ########.fr       */
+/*   Updated: 2024/02/10 18:14:41 by ciusca           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,8 @@ void	rb(t_lst **stk_b, int flag)
 {
 	t_lst	*temp;
 
+	if (ft_size(*stk_b) < 2)
+		return ;
 	temp = *stk_b;
 	temp = ft_newnode(temp->content);
 	ft_add_back(stk_b, temp);
@@ -43,6 +45,8 @@ void	rrb(t_lst **stk_b, int flag)
 	t_lst	*temp;
 	t_lst	*last;
 
+	if (ft_size(*stk_b) < 2)
+		return ;
 	temp = *stk_b;
 	while (temp->next != NULL)
 	{

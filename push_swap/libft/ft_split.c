@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ciusca <cristianiusca13@gmail.com>         +#+  +:+       +#+        */
+/*   By: ciusca <ciusca@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/18 12:28:40 by ciusca            #+#    #+#             */
-/*   Updated: 2023/10/30 20:45:08 by ciusca           ###   ########.fr       */
+/*   Updated: 2024/02/10 18:40:22 by ciusca           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,12 +54,7 @@ char	**ft_split(const char *s, char c)
 	char	**str_array;
 
 	if (s == NULL || *s == '\0')
-	{
-		str_array = ft_calloc(sizeof(char *), 1);
-		if (str_array == NULL)
-			return (NULL);
-		return (str_array);
-	}
+		return (NULL);
 	i = -1;
 	n_words = 0;
 	if (s[0] != c && s[0] != '\0')

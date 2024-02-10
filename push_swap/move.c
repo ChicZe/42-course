@@ -6,7 +6,7 @@
 /*   By: ciusca <ciusca@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/30 14:36:09 by ciusca            #+#    #+#             */
-/*   Updated: 2024/02/09 18:48:05 by ciusca           ###   ########.fr       */
+/*   Updated: 2024/02/10 19:00:30 by ciusca           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,4 +86,31 @@ void	neg_neg(int **moves, int index, t_lst **sa, t_lst **sb)
 		rrb(sb, 1);
 		b++;
 	}
+}
+
+void	restore_stack(t_lst **sa)
+{
+	t_lst	*temp;
+	int		count;
+	int		i;
+	int		len;
+
+	count = 1;
+	len = ft_size(*sa);
+	i = -1;
+	temp = *sa;
+	while (temp->next != NULL && temp->content < temp->next->content && temp->next)
+	{
+		count++;
+		temp = temp->next;
+	}
+	if (count < (len / 2))
+		while (++i < count)
+			ra(sa, 1);
+	else
+		while (len > count)
+		{
+			rra(sa, 1);
+			len--;
+		}
 }

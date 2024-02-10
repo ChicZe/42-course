@@ -6,7 +6,7 @@
 /*   By: ciusca <ciusca@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/28 15:11:04 by ciusca            #+#    #+#             */
-/*   Updated: 2024/02/09 18:43:12 by ciusca           ###   ########.fr       */
+/*   Updated: 2024/02/10 19:08:21 by ciusca           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,11 @@ void	ft_sorting(t_lst *stack_a, t_lst *stack_b, t_arr *stack)
 		free(moves[0]);
 		free(moves[1]);
 		pa(&stack_a, &stack_b);
+		/*ft_printf("stack a\n");
+		ft_printf("stack b\n");*/
 	}
+	restore_stack(&stack_a);
+	print_list(stack_a);
 }
 
 t_lst	*push_lis(t_lst *stk_a, t_lst **stk_b, int *lis, int n)

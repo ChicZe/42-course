@@ -6,7 +6,7 @@
 /*   By: ciusca <ciusca@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/20 16:45:54 by ciusca            #+#    #+#             */
-/*   Updated: 2024/01/29 18:10:18 by ciusca           ###   ########.fr       */
+/*   Updated: 2024/02/11 20:44:14 by ciusca           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,5 +70,6 @@ char	**matrix_join(char *string, char **mat)
 		j++;
 		k++;
 	}
+	free_matrix(mat);
 	return (new_mat);
 }

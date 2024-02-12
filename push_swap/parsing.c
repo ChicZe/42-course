@@ -6,11 +6,33 @@
 /*   By: ciusca <ciusca@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 10:59:18 by ciusca            #+#    #+#             */
-/*   Updated: 2024/02/10 19:12:40 by ciusca           ###   ########.fr       */
+/*   Updated: 2024/02/11 20:46:59 by ciusca           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
+
+int	check_sort(t_lst **sa, t_lst **sb)
+{
+	t_lst	*temp;
+	int		count;
+
+	temp = *sa;
+	count = 1;
+	while (temp->next != 0)
+	{
+		if (temp->content < temp->next->content)
+			count++;
+		temp = temp->next;
+	}
+	if (count == ft_size(*sa))
+	{
+		if (ft_size(*sb) == 0)
+			exit(0);
+		return (1);
+	}
+	return (0);
+}
 
 void	check_sorted(char **input, int argc)
 {
@@ -25,10 +47,12 @@ void	check_sorted(char **input, int argc)
 			break;
 		if (ft_atoi(input[i]) < ft_atoi(input[i + 1]))
 			count++;
-
 	}
 	if (count == argc - 1)
+	{
+		//free_matrix(input);
 		exit(0);
+	}
 }
 
 void	check_duplicates(char **input, int argc)
@@ -45,6 +69,7 @@ void	check_duplicates(char **input, int argc)
 			if (ft_atoi(input[i]) == ft_atoi(input[j]) && i != j)
 			{
 				ft_printf("Error\n");
+				//free_matrix(input);
 				exit(0);
 			}
 		}
@@ -62,9 +87,6 @@ void	check_invalid(char **input, int argc)
 	while (++i < argc)
 	{
 		n = ft_atoi(input[i]);
-		str = ft_calloc(sizeof(char *), ft_strlen(input[i]) + 1);
-		if (!str)
-			return ;
 		str = ft_itoa(n);
 		if (input[i][0] == '+')
 			str = ft_strjoin("+", str);
@@ -72,7 +94,9 @@ void	check_invalid(char **input, int argc)
 		{
 			ft_printf("Error\n");
 			free(str);
-			exit(0);
+			if (input != NULL)
+				free_matrix(input);
+			exit(1);
 		}
 		free(str);
 	}

@@ -6,7 +6,7 @@
 /*   By: ciusca <ciusca@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 10:40:46 by ciusca            #+#    #+#             */
-/*   Updated: 2024/02/10 18:20:43 by ciusca           ###   ########.fr       */
+/*   Updated: 2024/02/11 20:39:58 by ciusca           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,9 +45,12 @@ void	restore_stack(t_lst **sa);
 /* matrix functions */
 char	**matrix_join(char *string, char **mat);
 int		matrix_len(char **mat);
+void	free_matrix(char **mat);
+char	**ft_matrix_dup(char **mat);
 
 /* parsing */
 void	check_invalid(char **input, int argc);
+int		check_sort(t_lst **sa, t_lst **sb);
 
 /* stack operations */
 void	sa(t_lst **stk_a, int flag);
@@ -71,6 +74,7 @@ t_lst	*remove_first(t_lst *stk_a);
 t_lst	*create_stack(char **input);
 void	print_list(t_lst *stack_a);
 int		*list_to_array(t_lst *list);
+t_lst	*ft_last(t_lst *lst);
 
 /* utils */
 int		*fill_arr(t_arr *stack, t_lst *stack_a, t_lst *stack_b);
@@ -80,6 +84,8 @@ int		find_smallest(int *arr, int n);
 int		find_bigger(int n, int *arr, int target);
 int		find_min(int *arr, int n);
 int		count_bigger(int target, int *arr, int n);
+void	check_swap(t_lst **stk_a, t_lst **stk_b);
+
 
 /* lis algorithm */
 void	get_arr(t_lst **stk_a, t_lis *lis_arr);

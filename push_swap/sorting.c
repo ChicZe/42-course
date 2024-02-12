@@ -6,7 +6,7 @@
 /*   By: ciusca <ciusca@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/28 15:11:04 by ciusca            #+#    #+#             */
-/*   Updated: 2024/02/11 20:18:55 by ciusca           ###   ########.fr       */
+/*   Updated: 2024/02/12 18:53:05 by ciusca           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@ int	chose_move(int **moves, int n)
 			arr[i] = moves[0][i] + (moves[1][i] * -1);
 	}
 	i = find_smallest(arr, n);
+	free(arr);
 	return (i);
 }
 
@@ -71,7 +72,7 @@ void	ft_sorting(t_lst *stack_a, t_lst *stack_b, t_arr *stack)
 		ft_printf("stack b\n");*/
 	}
 	restore_stack(&stack_a);
-	//print_list(stack_a);
+	print_list(stack_a);
 }
 
 t_lst	*push_lis(t_lst *stk_a, t_lst **stk_b, int *lis, int n)
@@ -116,4 +117,9 @@ void	init_sort(char **input)
 	get_arr(&stack_a, &lis_arr);
 	stack_a = push_lis(stack_a, &stack_b, lis_arr.lis, lis_arr.n);
 	ft_sorting(stack_a, stack_b, &stack);
+	free(lis_arr.lis);
+	//free_list(stack_a);
+	//stack_a = NULL;
+	//free_list(stack_b);
+	//stack_b = NULL;
 }

@@ -6,7 +6,7 @@
 /*   By: ciusca <ciusca@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/23 16:06:26 by ciusca            #+#    #+#             */
-/*   Updated: 2024/02/11 17:46:49 by ciusca           ###   ########.fr       */
+/*   Updated: 2024/02/12 18:28:35 by ciusca           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,6 @@ int	*fill_lis(int *arr, t_lis *utils, int *lis, int *prev)
 			}
 		}
 	}
-	prev[utils->n] = utils->end_index;
 	return (prev);
 }
 
@@ -51,7 +50,7 @@ int	*ft_lis(int arr[], int n, t_lis *utils)
 	lis = (int *)malloc(sizeof(int) * n);
 	if (!lis)
 		return (NULL);
-	prev = (int *)malloc(sizeof(int) * n + 1);
+	prev = (int *)malloc(sizeof(int) * (n + 1));
 	if (!prev)
 		return (NULL);
 	i = -1;
@@ -60,7 +59,10 @@ int	*ft_lis(int arr[], int n, t_lis *utils)
 		lis[i] = 1;
 		prev[i] = -1;
 	}
+	prev[i] = -1;
 	prev = fill_lis(arr, utils, lis, prev);
+	prev[utils->n] = utils->end_index;
+	free(lis);
 	return (prev);
 }
 
@@ -132,5 +134,7 @@ void	get_arr(t_lst **stk_a, t_lis *lis_arr)
 	}
 	prev = ft_lis(sa, i, lis_arr);
 	sorted_arr = final_lis(sa, prev, i + 1, lis_arr);
+	free(prev);
+	free(sa);
 	lis_arr->lis = sorted_arr;
 }

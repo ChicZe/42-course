@@ -6,7 +6,7 @@
 /*   By: ciusca <ciusca@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/29 18:13:49 by ciusca            #+#    #+#             */
-/*   Updated: 2024/02/09 18:49:20 by ciusca           ###   ########.fr       */
+/*   Updated: 2024/02/12 17:10:22 by ciusca           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,7 @@ int	find_bigger(int n, int *arr, int target)
 			min = bigger[i];
 	if (j == 0)
 		min = find_min(arr, n);
+	free(bigger);
 	return (min);
 }
 

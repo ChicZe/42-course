@@ -6,11 +6,17 @@
 /*   By: ciusca <ciusca@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/21 19:31:01 by ciusca            #+#    #+#             */
-/*   Updated: 2024/02/10 18:14:18 by ciusca           ###   ########.fr       */
+/*   Updated: 2024/02/12 19:03:41 by ciusca           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
+
+void	remove_node(t_lst *node)
+{
+	free(node);
+	node = NULL;
+}
 
 t_lst	*remove_first(t_lst *stk_a)
 {
@@ -19,6 +25,7 @@ t_lst	*remove_first(t_lst *stk_a)
 	head = stk_a;
 	stk_a = stk_a->next;
 	free(head);
+	head = NULL;
 	return (stk_a);
 }
 
@@ -67,6 +74,7 @@ void	rra(t_lst **stk_a, int flag)
 	new = ft_newnode(temp->content);
 	last->next = NULL;
 	ft_add_front(stk_a, new);
+	remove_node(new);
 	if (flag == 1)
 		ft_printf("rra\n");
 }

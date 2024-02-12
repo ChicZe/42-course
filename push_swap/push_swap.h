@@ -6,7 +6,7 @@
 /*   By: ciusca <ciusca@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 10:40:46 by ciusca            #+#    #+#             */
-/*   Updated: 2024/02/11 20:39:58 by ciusca           ###   ########.fr       */
+/*   Updated: 2024/02/12 18:29:20 by ciusca           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,7 @@ t_lst	*create_stack(char **input);
 void	print_list(t_lst *stack_a);
 int		*list_to_array(t_lst *list);
 t_lst	*ft_last(t_lst *lst);
+void	free_list(t_lst *list);
 
 /* utils */
 int		*fill_arr(t_arr *stack, t_lst *stack_a, t_lst *stack_b);

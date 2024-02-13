@@ -6,7 +6,7 @@
 /*   By: ciusca <ciusca@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/23 16:06:26 by ciusca            #+#    #+#             */
-/*   Updated: 2024/02/12 18:28:35 by ciusca           ###   ########.fr       */
+/*   Updated: 2024/02/13 17:15:11 by ciusca           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,7 @@ int	*rev_arr(int *arr, int n)
 		i++;
 		j--;
 	}
+	free(arr);
 	return (new);
 }
 
@@ -115,13 +116,13 @@ int	*final_lis(int *arr, int *index, int n, t_lis *lis_arr)
 	return (temp);
 }
 
-void	get_arr(t_lst **stk_a, t_lis *lis_arr)
+int		*get_arr(t_lst **stk_a, t_lis *lis_arr)
 {
 	int		*sa;
 	t_lst	*temp;
 	int		i;
-	int		*sorted_arr;
 	int		*prev;
+	int		*sorted_arr;
 
 	i = 0;
 	temp = *stk_a;
@@ -136,5 +137,5 @@ void	get_arr(t_lst **stk_a, t_lis *lis_arr)
 	sorted_arr = final_lis(sa, prev, i + 1, lis_arr);
 	free(prev);
 	free(sa);
-	lis_arr->lis = sorted_arr;
+	return (sorted_arr);
 }

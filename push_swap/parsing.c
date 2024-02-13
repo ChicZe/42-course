@@ -6,13 +6,13 @@
 /*   By: ciusca <ciusca@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 10:59:18 by ciusca            #+#    #+#             */
-/*   Updated: 2024/02/11 20:46:59 by ciusca           ###   ########.fr       */
+/*   Updated: 2024/02/13 19:31:09 by ciusca           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-int	check_sort(t_lst **sa, t_lst **sb)
+int	check_sort(t_lst **sa)
 {
 	t_lst	*temp;
 	int		count;
@@ -26,11 +26,7 @@ int	check_sort(t_lst **sa, t_lst **sb)
 		temp = temp->next;
 	}
 	if (count == ft_size(*sa))
-	{
-		if (ft_size(*sb) == 0)
-			exit(0);
 		return (1);
-	}
 	return (0);
 }
 
@@ -40,7 +36,7 @@ void	check_sorted(char **input, int argc)
 	int count;
 
 	count = 1;
-	i = 0;
+	i = -1;
 	while (input[++i])
 	{
 		if (i == argc -1)
@@ -48,10 +44,11 @@ void	check_sorted(char **input, int argc)
 		if (ft_atoi(input[i]) < ft_atoi(input[i + 1]))
 			count++;
 	}
-	if (count == argc - 1)
+	if (count == argc)
 	{
-		//free_matrix(input);
-		exit(0);
+		free_matrix(input);
+		ft_printf("ciao %d\n", i);
+		exit(1);
 	}
 }
 
@@ -60,7 +57,7 @@ void	check_duplicates(char **input, int argc)
 	int	i;
 	int	j;
 
-	i = 0;
+	i = -1;
 	while (++i < argc)
 	{
 		j = 0;
@@ -69,8 +66,9 @@ void	check_duplicates(char **input, int argc)
 			if (ft_atoi(input[i]) == ft_atoi(input[j]) && i != j)
 			{
 				ft_printf("Error\n");
-				//free_matrix(input);
-				exit(0);
+				free_matrix(input);
+				ft_printf("ciao %d\n", i);
+				exit(1);
 			}
 		}
 	}
@@ -83,7 +81,7 @@ void	check_invalid(char **input, int argc)
 	int		n;
 	char	*str;
 
-	i = 0;
+	i = -1;
 	while (++i < argc)
 	{
 		n = ft_atoi(input[i]);
@@ -96,6 +94,7 @@ void	check_invalid(char **input, int argc)
 			free(str);
 			if (input != NULL)
 				free_matrix(input);
+			ft_printf("ciao %d\n", i);
 			exit(1);
 		}
 		free(str);

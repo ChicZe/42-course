@@ -6,7 +6,7 @@
 /*   By: ciusca <ciusca@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 10:40:46 by ciusca            #+#    #+#             */
-/*   Updated: 2024/02/12 18:29:20 by ciusca           ###   ########.fr       */
+/*   Updated: 2024/02/13 19:31:40 by ciusca           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ typedef struct c_list
 {
 	int				content;
 	struct c_list	*next;
+	char			**input;
 }				t_lst;
 
 typedef struct s_arr
@@ -50,7 +51,7 @@ char	**ft_matrix_dup(char **mat);
 
 /* parsing */
 void	check_invalid(char **input, int argc);
-int		check_sort(t_lst **sa, t_lst **sb);
+int		check_sort(t_lst **sa);
 
 /* stack operations */
 void	sa(t_lst **stk_a, int flag);
@@ -75,7 +76,7 @@ t_lst	*create_stack(char **input);
 void	print_list(t_lst *stack_a);
 int		*list_to_array(t_lst *list);
 t_lst	*ft_last(t_lst *lst);
-void	free_list(t_lst *list);
+void	free_list(t_lst **list);
 
 /* utils */
 int		*fill_arr(t_arr *stack, t_lst *stack_a, t_lst *stack_b);
@@ -85,11 +86,11 @@ int		find_smallest(int *arr, int n);
 int		find_bigger(int n, int *arr, int target);
 int		find_min(int *arr, int n);
 int		count_bigger(int target, int *arr, int n);
-void	check_swap(t_lst **stk_a, t_lst **stk_b);
+int		check_swap(t_lst **stk_a, t_lst **stk_b);
 
 
 /* lis algorithm */
-void	get_arr(t_lst **stk_a, t_lis *lis_arr);
+int		*get_arr(t_lst **stk_a, t_lis *lis_arr);
 
 /* sorting */
 void	init_sort(char **input);

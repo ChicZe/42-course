@@ -6,7 +6,7 @@
 /*   By: ciusca <ciusca@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 10:37:06 by ciusca            #+#    #+#             */
-/*   Updated: 2024/02/12 19:02:24 by ciusca           ###   ########.fr       */
+/*   Updated: 2024/02/13 19:32:56 by ciusca           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,30 +51,20 @@ void	print_list(t_lst *list)
 int	main(int argc, char **argv)
 {
 	char	**input;
-	char	*str;
 
 	if (argc == 1)
 		return (0);
 	else if (argc == 2)
 	{
-		argv[0] = ft_strjoin(argv[0], " ");
-		str = ft_strjoin(argv[0], argv[1]);
-		if (!str)
-			return (0);
-		input = ft_split(str, 32);
+		input = ft_split(argv[1], 32);
 		if (!input)
-		{
-			free(str);
-			return (0);
-		}
-		free(str);
+			return (1);
 	}
 	else
-		input = argv;
+		input = ft_matrix_dup(&argv[1]);
 	argc = matrix_len(input);
-	for (int i = 0; input[i]; ++i)
-		ft_printf("input = %s\n", input[i]);
 	check_invalid(input, argc);
 	init_sort(input);
-	free_matrix(input);
+	//if (input != NULL)
+	//	free_matrix(input);
 }

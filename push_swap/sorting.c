@@ -6,7 +6,7 @@
 /*   By: ciusca <ciusca@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/28 15:11:04 by ciusca            #+#    #+#             */
-/*   Updated: 2024/02/12 18:53:05 by ciusca           ###   ########.fr       */
+/*   Updated: 2024/02/13 19:33:16 by ciusca           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ void	ft_sorting(t_lst *stack_a, t_lst *stack_b, t_arr *stack)
 		ft_printf("stack b\n");*/
 	}
 	restore_stack(&stack_a);
-	print_list(stack_a);
+	free_list(&stack_a);
 }
 
 t_lst	*push_lis(t_lst *stk_a, t_lst **stk_b, int *lis, int n)
@@ -80,8 +80,6 @@ t_lst	*push_lis(t_lst *stk_a, t_lst **stk_b, int *lis, int n)
 	int		i;
 
 	i = 0;
-	// func();
-	// if !func() return ;
 	while (i < n)
 	{
 		if (lis[i] == stk_a->content)
@@ -91,13 +89,12 @@ t_lst	*push_lis(t_lst *stk_a, t_lst **stk_b, int *lis, int n)
 		}
 		else
 			pb(&stk_a, stk_b);
-		check_sort(&stk_a, stk_b);
-		//stk_a = stk_a->next;
+		if (check_sort(&stk_a) == 1 && ft_size(*stk_b) == 0)
+			return (NULL);
 	}
-	//&& stk_a->content > stk_a->next->content
 	while (stk_a->content != lis[0])
 	{
-		if (stk_a->content < stk_a->next->content && check_sort(&stk_a, stk_b) == 1)
+		if (stk_a->content < stk_a->next->content && check_sort(&stk_a) == 1)
 			break;
 		pb(&stk_a, stk_b);
 	}
@@ -110,16 +107,21 @@ void	init_sort(char **input)
 	t_lst	*stack_b;
 	t_lis	lis_arr;
 	t_arr	stack;
+	int		*sorted_arr;
 
 	stack_b = NULL;
 	stack_a = create_stack(input);
-	check_swap(&stack_a, &stack_b);
-	get_arr(&stack_a, &lis_arr);
-	stack_a = push_lis(stack_a, &stack_b, lis_arr.lis, lis_arr.n);
+	if (check_swap(&stack_a, &stack_b) == 0)
+	{
+		free_matrix(input);
+		free_list(&stack_a);
+		exit(0);
+	}
+	sorted_arr = get_arr(&stack_a, &lis_arr);
+	stack_a = push_lis(stack_a, &stack_b, sorted_arr, lis_arr.n);
+	free_matrix(input);
+	free(sorted_arr);
+	if (!stack_a)
+		exit(0);
 	ft_sorting(stack_a, stack_b, &stack);
-	free(lis_arr.lis);
-	//free_list(stack_a);
-	//stack_a = NULL;
-	//free_list(stack_b);
-	//stack_b = NULL;
 }

@@ -6,7 +6,7 @@
 /*   By: ciusca <ciusca@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/29 18:13:49 by ciusca            #+#    #+#             */
-/*   Updated: 2024/02/12 17:10:22 by ciusca           ###   ########.fr       */
+/*   Updated: 2024/02/13 17:19:18 by ciusca           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ int	find_bigger(int n, int *arr, int target)
 	int	j;
 	int	min;
 
-	bigger = malloc(sizeof(int) * count_bigger(target, arr, n));
+	bigger = malloc(sizeof(int) * count_bigger(target, arr, n) + 1);
 	j = 0;
 	i = -1;
 	while (++i < n)

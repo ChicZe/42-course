@@ -6,7 +6,7 @@
 /*   By: ciusca <ciusca@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/28 18:40:25 by ciusca            #+#    #+#             */
-/*   Updated: 2024/02/12 18:38:42 by ciusca           ###   ########.fr       */
+/*   Updated: 2024/02/13 16:57:34 by ciusca           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,16 +46,17 @@ int	*list_to_array(t_lst *list)
 	return (arr);
 }
 
-void	free_list(t_lst *list)
+void	free_list(t_lst **list)
 {
 	t_lst	*current;
 	t_lst	*next_node;
 
-	current = list;
+	current = *list;
 	while (current != NULL)
 	{
 		next_node = current->next; 
 		free(current);
 		current = next_node;
 	}
+	current = NULL;
 }

@@ -6,7 +6,7 @@
 /*   By: ciusca <ciusca@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/21 16:40:07 by ciusca            #+#    #+#             */
-/*   Updated: 2024/02/11 18:30:43 by ciusca           ###   ########.fr       */
+/*   Updated: 2024/02/13 19:23:00 by ciusca           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,9 +67,9 @@ t_lst	*create_stack(char **input)
 	t_lst	*temp;
 	int		i;
 
-	stack_a = ft_newnode(ft_atoi(input[1]));
+	stack_a = ft_newnode(ft_atoi(input[0]));
 	temp = stack_a;
-	i = 2;
+	i = 1;
 	while (input[i])
 	{
 		temp->next = ft_newnode(ft_atoi(input[i]));

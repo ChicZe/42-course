@@ -1,40 +1,40 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_atoi.c                                          :+:      :+:    :+:   */
+/*   pf_putstr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ciusca <ciusca@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/13 11:19:07 by ciusca            #+#    #+#             */
-/*   Updated: 2024/02/17 18:49:54 by ciusca           ###   ########.fr       */
+/*   Created: 2023/10/18 21:23:17 by ciusca            #+#    #+#             */
+/*   Updated: 2024/02/17 19:03:36 by ciusca           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../libft.h"
 
-int	ft_atoi(const char *str)
+int	pf_putstr(char *s)
 {
-	long int	i;
-	long int	number;
-	long int	neg;
+	int		i;
+	int		count;
+	int		len;
+	char	*str;
 
-	neg = 1;
-	number = 0;
+	len = 0;
+	count = 0;
 	i = 0;
-	while (str[i] == ' ' || str[i] == '\n'
-		|| str[i] == '\t' || str[i] == '\v'
-		|| str[i] == '\f' || str[i] == '\r')
-		i ++;
-	if (str[i] == '-' || str[i] == '+')
+	if (s == NULL)
+		s = "(null)";
+	len = ft_strlen(s);
+	str = malloc(sizeof(char *) * len + 1);
+	if (!str)
+		return (0);
+	ft_strlcpy(str, s, len + 1);
+	while (str[i] != 0)
 	{
-		if (str[i] == '-')
-			neg *= -1;
+		write(1, &str[i], 1);
 		i ++;
+		count++;
 	}
-	while (str[i] <= '9' && str[i] >= '0')
-	{
-		number = number * 10 + (str[i] - 48);
-		i++;
-	}
-	return (number * neg);
+	free(str);
+	return (count);
 }

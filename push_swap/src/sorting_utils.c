@@ -6,11 +6,11 @@
 /*   By: ciusca <ciusca@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/29 18:13:49 by ciusca            #+#    #+#             */
-/*   Updated: 2024/02/13 17:19:18 by ciusca           ###   ########.fr       */
+/*   Updated: 2024/02/20 19:59:34 by ciusca           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "../push_swap.h"
 
 int	ft_max(int a, int b)
 {

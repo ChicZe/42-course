@@ -6,11 +6,11 @@
 /*   By: ciusca <ciusca@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/23 16:06:26 by ciusca            #+#    #+#             */
-/*   Updated: 2024/02/13 17:15:11 by ciusca           ###   ########.fr       */
+/*   Updated: 2024/02/20 19:59:02 by ciusca           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "../push_swap.h"
 
 int	*fill_lis(int *arr, t_lis *utils, int *lis, int *prev)
 {
@@ -116,7 +116,7 @@ int	*final_lis(int *arr, int *index, int n, t_lis *lis_arr)
 	return (temp);
 }
 
-int		*get_arr(t_lst **stk_a, t_lis *lis_arr)
+int	*get_arr(t_lst **stk_a, t_lis *lis_arr)
 {
 	int		*sa;
 	t_lst	*temp;

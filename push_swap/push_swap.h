@@ -6,7 +6,7 @@
 /*   By: ciusca <ciusca@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 10:40:46 by ciusca            #+#    #+#             */
-/*   Updated: 2024/02/13 19:31:40 by ciusca           ###   ########.fr       */
+/*   Updated: 2024/02/20 19:42:40 by ciusca           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,6 @@ typedef struct c_list
 {
 	int				content;
 	struct c_list	*next;
-	char			**input;
 }				t_lst;
 
 typedef struct s_arr
@@ -52,6 +51,7 @@ char	**ft_matrix_dup(char **mat);
 /* parsing */
 void	check_invalid(char **input, int argc);
 int		check_sort(t_lst **sa);
+void	rev_one_sort(t_lst **sa, char **input);
 
 /* stack operations */
 void	sa(t_lst **stk_a, int flag);
@@ -87,7 +87,7 @@ int		find_bigger(int n, int *arr, int target);
 int		find_min(int *arr, int n);
 int		count_bigger(int target, int *arr, int n);
 int		check_swap(t_lst **stk_a, t_lst **stk_b);
-
+void	exit_function(char **input, char *str);
 
 /* lis algorithm */
 int		*get_arr(t_lst **stk_a, t_lis *lis_arr);

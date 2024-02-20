@@ -6,11 +6,11 @@
 /*   By: ciusca <ciusca@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/28 15:11:04 by ciusca            #+#    #+#             */
-/*   Updated: 2024/02/13 19:33:16 by ciusca           ###   ########.fr       */
+/*   Updated: 2024/02/20 19:59:39 by ciusca           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "../push_swap.h"
 
 void	make_moves(t_lst **sa, t_lst **sb, int index, int **moves)
 {
@@ -60,7 +60,6 @@ void	ft_sorting(t_lst *stack_a, t_lst *stack_b, t_arr *stack)
 	i = -1;
 	while (++i < end)
 	{
-		//check_swap(&stack_a, &stack_b);
 		moves[0] = fill_arr(stack, stack_a, stack_b);
 		moves[1] = count_b(stack_b);
 		move_index = chose_move(moves, ft_size(stack_b));
@@ -68,8 +67,6 @@ void	ft_sorting(t_lst *stack_a, t_lst *stack_b, t_arr *stack)
 		free(moves[0]);
 		free(moves[1]);
 		pa(&stack_a, &stack_b);
-		/*ft_printf("stack a\n");
-		ft_printf("stack b\n");*/
 	}
 	restore_stack(&stack_a);
 	free_list(&stack_a);
@@ -94,8 +91,9 @@ t_lst	*push_lis(t_lst *stk_a, t_lst **stk_b, int *lis, int n)
 	}
 	while (stk_a->content != lis[0])
 	{
+		check_swap(&stk_a, stk_b);
 		if (stk_a->content < stk_a->next->content && check_sort(&stk_a) == 1)
-			break;
+			break ;
 		pb(&stk_a, stk_b);
 	}
 	return (stk_a);

@@ -6,11 +6,11 @@
 /*   By: ciusca <ciusca@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/30 14:36:09 by ciusca            #+#    #+#             */
-/*   Updated: 2024/02/12 17:10:48 by ciusca           ###   ########.fr       */
+/*   Updated: 2024/02/20 19:59:11 by ciusca           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "../push_swap.h"
 
 void	pos_pos(int **moves, int index, t_lst **sa, t_lst **sb)
 {
@@ -99,18 +99,16 @@ void	restore_stack(t_lst **sa)
 	len = ft_size(*sa);
 	i = -1;
 	temp = *sa;
-	while (temp->next != NULL && temp->content < temp->next->content && temp->next)
+	while (temp->next != NULL && temp->content < temp->next->content
+		&& temp->next)
 	{
 		count++;
 		temp = temp->next;
 	}
-	if (count < (len / 2))
+	if (count <= (len / 2))
 		while (++i < count)
 			ra(sa, 1);
 	else
-		while (len > count)
-		{
+		while (--len >= count)
 			rra(sa, 1);
-			len--;
-		}
 }

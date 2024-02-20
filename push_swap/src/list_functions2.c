@@ -6,11 +6,11 @@
 /*   By: ciusca <ciusca@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/28 18:40:25 by ciusca            #+#    #+#             */
-/*   Updated: 2024/02/13 16:57:34 by ciusca           ###   ########.fr       */
+/*   Updated: 2024/02/20 20:22:57 by ciusca           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "../push_swap.h"
 
 int	ft_size(t_lst *lst)
 {
@@ -54,9 +54,35 @@ void	free_list(t_lst **list)
 	current = *list;
 	while (current != NULL)
 	{
-		next_node = current->next; 
+		next_node = current->next;
 		free(current);
 		current = next_node;
 	}
 	current = NULL;
+}
+
+void	rev_one_sort(t_lst **sa, char **input)
+{
+	t_lst	*temp;
+	int		count;
+	int		first;
+
+	count = 1;
+	temp = *sa;
+	first = temp->content;
+	temp = temp->next;
+	while (temp->content > temp->next->content)
+	{
+		count++;
+		if (count == ft_size(*sa) - 1)
+			break ;
+		temp = temp->next;
+	}
+	if (count == ft_size(*sa) - 1 && first < ft_last(temp)->content)
+	{
+		ra(sa, 1);
+		free_matrix(input);
+		free_list(sa);
+		exit(0);
+	}
 }

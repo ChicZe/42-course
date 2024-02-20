@@ -6,11 +6,11 @@
 /*   By: ciusca <ciusca@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/28 16:46:19 by ciusca            #+#    #+#             */
-/*   Updated: 2024/02/09 18:50:18 by ciusca           ###   ########.fr       */
+/*   Updated: 2024/02/20 19:58:57 by ciusca           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "../push_swap.h"
 
 int	count_bigger(int target, int *arr, int n)
 {
@@ -34,11 +34,11 @@ int	find_pos(int n, int target)
 	count = 1;
 	i = -1;
 	mid = n / 2;
-	while (++i < mid)
+	while (++i <= mid)
 		if (i == target)
 			return (i);
 	i = n;
-	while (--i >= mid)
+	while (--i > mid)
 	{
 		if (i == target)
 			return (count * -1);
@@ -62,10 +62,10 @@ int	*count_b(t_lst *stack_b)
 	if (!move_b)
 		return (NULL);
 	middle = len / 2;
-	while (++i < middle)
+	while (++i <= middle)
 		move_b[i] = i;
 	i = len;
-	while (--i >= middle)
+	while (--i > middle)
 	{
 		move_b[i] = count * -1;
 		count++;

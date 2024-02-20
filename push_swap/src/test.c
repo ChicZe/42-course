@@ -6,11 +6,11 @@
 /*   By: ciusca <ciusca@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/20 16:45:54 by ciusca            #+#    #+#             */
-/*   Updated: 2024/02/13 18:55:17 by ciusca           ###   ########.fr       */
+/*   Updated: 2024/02/20 19:59:41 by ciusca           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "../push_swap.h"
 
 int	matrix_len(char **mat)
 {
@@ -20,6 +20,22 @@ int	matrix_len(char **mat)
 	while (mat[i])
 		i++;
 	return (i);
+}
+
+void	print_list(t_lst *list)
+{
+	t_lst	*temp;
+	int		i;
+
+	i = 0;
+	temp = list;
+	while (temp)
+	{
+		ft_printf("data = %d\n", temp->content);
+		temp = temp->next;
+		i++;
+	}
+	ft_printf("stack n = %d\n", i);
 }
 
 char	**ft_matrix_dup(char **matrix)

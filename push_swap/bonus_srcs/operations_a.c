@@ -6,21 +6,21 @@
 /*   By: ciusca <ciusca@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/21 19:31:01 by ciusca            #+#    #+#             */
-/*   Updated: 2024/02/13 17:11:27 by ciusca           ###   ########.fr       */
+/*   Updated: 2024/02/20 19:57:38 by ciusca           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "../checker.h"
 
-void remove_node(t_lst *node)
+void	remove_node(t_lst *node)
 {
 	free(node);
 	node = NULL;
 }
 
-t_lst *remove_first(t_lst *stk_a)
+t_lst	*remove_first(t_lst *stk_a)
 {
-	t_lst *head;
+	t_lst	*head;
 
 	head = stk_a;
 	stk_a = stk_a->next;
@@ -29,10 +29,10 @@ t_lst *remove_first(t_lst *stk_a)
 	return (stk_a);
 }
 
-void sa(t_lst **stk_a, int flag)
+void	sa(t_lst **stk_a, int flag)
 {
-	t_lst *temp;
-	t_lst *temp2;
+	t_lst	*temp;
+	t_lst	*temp2;
 
 	temp = *stk_a;
 	temp2 = temp->next;
@@ -43,12 +43,12 @@ void sa(t_lst **stk_a, int flag)
 		ft_printf("sa\n");
 }
 
-void ra(t_lst **stk_a, int flag)
+void	ra(t_lst **stk_a, int flag)
 {
-	t_lst *temp;
+	t_lst	*temp;
 
 	if (ft_size(*stk_a) < 2)
-		return;
+		return ;
 	temp = *stk_a;
 	temp = ft_newnode(temp->content);
 	ft_add_back(stk_a, temp);
@@ -57,14 +57,14 @@ void ra(t_lst **stk_a, int flag)
 		ft_printf("ra\n");
 }
 
-void rra(t_lst **stk_a, int flag)
+void	rra(t_lst **stk_a, int flag)
 {
-	t_lst *temp;
-	t_lst *last;
-	t_lst *new;
+	t_lst	*temp;
+	t_lst	*last;
+	t_lst	*new;
 
 	if (ft_size(*stk_a) < 2)
-		return;
+		return ;
 	temp = *stk_a;
 	while (temp->next != NULL)
 	{
@@ -75,7 +75,6 @@ void rra(t_lst **stk_a, int flag)
 	free(last->next);
 	last->next = NULL;
 	ft_add_front(stk_a, new);
-	//remove_node(new);
 	if (flag == 1)
 		ft_printf("rra\n");
 }

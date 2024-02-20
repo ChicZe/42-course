@@ -6,11 +6,11 @@
 /*   By: ciusca <ciusca@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/21 16:40:07 by ciusca            #+#    #+#             */
-/*   Updated: 2024/02/13 19:23:00 by ciusca           ###   ########.fr       */
+/*   Updated: 2024/02/20 19:57:25 by ciusca           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "../checker.h"
 
 t_lst	*ft_last(t_lst *lst)
 {

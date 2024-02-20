@@ -6,11 +6,11 @@
 /*   By: ciusca <ciusca@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 19:31:34 by ciusca            #+#    #+#             */
-/*   Updated: 2024/02/12 18:55:02 by ciusca           ###   ########.fr       */
+/*   Updated: 2024/02/20 19:59:16 by ciusca           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "../push_swap.h"
 
 void	ss(t_lst **stk_a, t_lst **stk_b)
 {
@@ -43,7 +43,6 @@ void	pa(t_lst **stk_a, t_lst **stk_b)
 	temp = ft_newnode(new->content);
 	ft_add_front(stk_a, temp);
 	*stk_b = remove_first(*stk_b);
-		//free(temp);
 	ft_printf("pa\n");
 }
 

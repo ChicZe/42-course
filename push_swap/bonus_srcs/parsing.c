@@ -6,11 +6,18 @@
 /*   By: ciusca <ciusca@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 10:59:18 by ciusca            #+#    #+#             */
-/*   Updated: 2024/02/13 19:31:09 by ciusca           ###   ########.fr       */
+/*   Updated: 2024/02/20 20:01:21 by ciusca           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "../checker.h"
+
+void	exit_function(char **input, char *str)
+{
+	free(str);
+	free_matrix(input);
+	exit(1);
+}
 
 int	check_sort(t_lst **sa)
 {
@@ -33,22 +40,21 @@ int	check_sort(t_lst **sa)
 void	check_sorted(char **input, int argc)
 {
 	int	i;
-	int count;
+	int	count;
 
 	count = 1;
 	i = -1;
 	while (input[++i])
 	{
 		if (i == argc -1)
-			break;
+			break ;
 		if (ft_atoi(input[i]) < ft_atoi(input[i + 1]))
 			count++;
 	}
 	if (count == argc)
 	{
 		free_matrix(input);
-		ft_printf("ciao %d\n", i);
-		exit(1);
+		exit(0);
 	}
 }
 
@@ -65,9 +71,8 @@ void	check_duplicates(char **input, int argc)
 		{
 			if (ft_atoi(input[i]) == ft_atoi(input[j]) && i != j)
 			{
-				ft_printf("Error\n");
+				write(2, "Error\n", 6);
 				free_matrix(input);
-				ft_printf("ciao %d\n", i);
 				exit(1);
 			}
 		}
@@ -80,6 +85,7 @@ void	check_invalid(char **input, int argc)
 	int		i;
 	int		n;
 	char	*str;
+	char	*line;
 
 	i = -1;
 	while (++i < argc)
@@ -87,15 +93,16 @@ void	check_invalid(char **input, int argc)
 		n = ft_atoi(input[i]);
 		str = ft_itoa(n);
 		if (input[i][0] == '+')
-			str = ft_strjoin("+", str);
+		{
+			free(str);
+			line = ft_itoa(n);
+			str = ft_strjoin("+", line);
+			free(line);
+		}
 		if (ft_strncmp(str, input[i], ft_strlen(input[i])) != 0)
 		{
-			ft_printf("Error\n");
-			free(str);
-			if (input != NULL)
-				free_matrix(input);
-			ft_printf("ciao %d\n", i);
-			exit(1);
+			write(2, "Error\n", 6);
+			exit_function(input, str);
 		}
 		free(str);
 	}

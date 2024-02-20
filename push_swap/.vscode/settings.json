@@ -4,6 +4,7 @@
 		"libft.h": "c",
 		"list_functions": "c",
 		"push_swap.h": "c",
-		"limits": "c"
+		"limits": "c",
+		"checker.h": "c"
 	}
 }

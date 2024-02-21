@@ -6,7 +6,7 @@
 /*   By: ciusca <ciusca@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/20 19:43:37 by ciusca            #+#    #+#             */
-/*   Updated: 2024/02/21 10:20:39 by ciusca           ###   ########.fr       */
+/*   Updated: 2024/02/21 11:51:41 by ciusca           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,11 +55,6 @@ int	read_input(t_lst **stk_a, t_lst **stk_b)
 	char	*line;
 
 	line = get_next_line(0);
-	/*if (ft_strncmp(line, "Error\n", ft_strlen(line)) == 0)
-	{
-		free(line);
-		return (0);
-	}*/
 	while (line)
 	{
 		if (check_op(line, stk_a, stk_b) == 0)
@@ -74,11 +69,10 @@ int	read_input(t_lst **stk_a, t_lst **stk_b)
 	return (1);
 }
 
-
 void	init_check(char **input)
 {
-	t_lst *stack_a;
-	t_lst *stack_b;
+	t_lst	*stack_a;
+	t_lst	*stack_b;
 
 	stack_a = create_stack(input);
 	stack_b = NULL;

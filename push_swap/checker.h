@@ -6,14 +6,14 @@
 /*   By: ciusca <ciusca@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/20 19:35:14 by ciusca            #+#    #+#             */
-/*   Updated: 2024/02/20 20:00:49 by ciusca           ###   ########.fr       */
+/*   Updated: 2024/02/21 11:51:16 by ciusca           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# ifndef CHECKER_H
-#define CHECKER_H
+#ifndef CHECKER_H
+# define CHECKER_H
 
-#include "libft/libft.h"
+# include "libft/libft.h"
 
 typedef struct c_list
 {

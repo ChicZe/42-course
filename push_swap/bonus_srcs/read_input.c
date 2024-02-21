@@ -6,7 +6,7 @@
 /*   By: ciusca <ciusca@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/20 19:43:37 by ciusca            #+#    #+#             */
-/*   Updated: 2024/02/20 20:08:52 by ciusca           ###   ########.fr       */
+/*   Updated: 2024/02/21 10:20:39 by ciusca           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 void	close_function(char **input, t_lst **sa, t_lst **sb, int quit)
 {
 	free_matrix(input);
-	if (ft_size(*sb) != 0)
+	if (ft_size(*sb) > 0 && *sb != NULL)
 		free_list(sb);
 	free_list(sa);
 	exit(quit);
@@ -34,11 +34,11 @@ int	check_op(char *line, t_lst **stk_a, t_lst **stk_b)
 	else if (ft_strncmp(line, "ra\n", ft_strlen(line)) == 0)
 		ra(stk_a, 0);
 	else if (ft_strncmp(line, "rb\n", ft_strlen(line)) == 0)
-		pa(stk_b, 0);
+		rb(stk_b, 0);
 	else if (ft_strncmp(line, "rra\n", ft_strlen(line)) == 0)
 		rra(stk_a, 0);
 	else if (ft_strncmp(line, "rrb\n", ft_strlen(line)) == 0)
-		pa(stk_b, 0);
+		rrb(stk_b, 0);
 	else if (ft_strncmp(line, "rr\n", ft_strlen(line)) == 0)
 		rr(stk_a, stk_b);
 	else if (ft_strncmp(line, "rrr\n", ft_strlen(line)) == 0)
@@ -55,11 +55,18 @@ int	read_input(t_lst **stk_a, t_lst **stk_b)
 	char	*line;
 
 	line = get_next_line(0);
-	
+	/*if (ft_strncmp(line, "Error\n", ft_strlen(line)) == 0)
+	{
+		free(line);
+		return (0);
+	}*/
 	while (line)
 	{
 		if (check_op(line, stk_a, stk_b) == 0)
+		{
+			free(line);
 			return (0);
+		}
 		free(line);
 		line = get_next_line(0);
 	}
@@ -76,7 +83,10 @@ void	init_check(char **input)
 	stack_a = create_stack(input);
 	stack_b = NULL;
 	if (read_input(&stack_a, &stack_b) == 0)
+	{
+		ft_printf("KO\n");
 		close_function(input, &stack_a, &stack_b, 1);
+	}
 	if (check_sort(&stack_a) == 1 && ft_size(stack_b) == 0)
 	{
 		ft_printf("OK\n");

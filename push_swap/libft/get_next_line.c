@@ -6,7 +6,7 @@
 /*   By: ciusca <ciusca@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 20:50:04 by ciusca            #+#    #+#             */
-/*   Updated: 2024/01/08 13:49:35 by ciusca           ###   ########.fr       */
+/*   Updated: 2024/02/21 10:34:18 by ciusca           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,8 @@ char	*get_curr_line(const char *str)
 	}
 	else
 		dup[i] = 0;
+	free(dup);
+	dup = NULL;
 	return (dup);
 }
 
@@ -113,10 +115,14 @@ char	*get_next_line(int fd)
 		if (file[fd] != NULL)
 			free(file[fd]);
 		file[fd] = NULL;
-		free(line);
-		return (NULL);
+		return (free(line), NULL);
 	}
 	if (!file[fd])
 		free(line);
+	if (file[fd][0] == 0)
+	{
+		free(file[fd]);
+		file[fd] = NULL;
+	}
 	return (line);
 }

@@ -6,7 +6,7 @@
 /*   By: ciusca <ciusca@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 10:59:18 by ciusca            #+#    #+#             */
-/*   Updated: 2024/02/20 20:01:21 by ciusca           ###   ########.fr       */
+/*   Updated: 2024/02/23 14:24:47 by ciusca           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,8 @@ int	check_sort(t_lst **sa)
 	t_lst	*temp;
 	int		count;
 
+	if (ft_size(*sa) == 0)
+		return (0);
 	temp = *sa;
 	count = 1;
 	while (temp->next != 0)
@@ -35,27 +37,6 @@ int	check_sort(t_lst **sa)
 	if (count == ft_size(*sa))
 		return (1);
 	return (0);
-}
-
-void	check_sorted(char **input, int argc)
-{
-	int	i;
-	int	count;
-
-	count = 1;
-	i = -1;
-	while (input[++i])
-	{
-		if (i == argc -1)
-			break ;
-		if (ft_atoi(input[i]) < ft_atoi(input[i + 1]))
-			count++;
-	}
-	if (count == argc)
-	{
-		free_matrix(input);
-		exit(0);
-	}
 }
 
 void	check_duplicates(char **input, int argc)
@@ -77,7 +58,6 @@ void	check_duplicates(char **input, int argc)
 			}
 		}
 	}
-	check_sorted(input, argc);
 }
 
 void	check_invalid(char **input, int argc)
@@ -92,7 +72,7 @@ void	check_invalid(char **input, int argc)
 	{
 		n = ft_atoi(input[i]);
 		str = ft_itoa(n);
-		if (input[i][0] == '+')
+		if (input[i][0] == '+' && input[i][1] != ' ' && input[i][1])
 		{
 			free(str);
 			line = ft_itoa(n);

@@ -6,7 +6,7 @@
 /*   By: ciusca <ciusca@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 19:31:34 by ciusca            #+#    #+#             */
-/*   Updated: 2024/02/20 19:58:00 by ciusca           ###   ########.fr       */
+/*   Updated: 2024/02/23 12:57:32 by ciusca           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,8 @@ void	pa(t_lst **stk_a, t_lst **stk_b)
 	t_lst	*temp;
 	t_lst	*new;
 
+	if (ft_size(*stk_b) < 1)
+		return ;
 	temp = *stk_b;
 	new = *stk_b;
 	temp = ft_newnode(new->content);
@@ -47,6 +49,8 @@ void	pb(t_lst **stk_a, t_lst **stk_b)
 	t_lst	*temp;
 	t_lst	*new;
 
+	if (ft_size(*stk_a) < 1)
+		return ;
 	temp = *stk_a;
 	new = *stk_a;
 	temp = ft_newnode(new->content);

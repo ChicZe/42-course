@@ -6,7 +6,7 @@
 /*   By: ciusca <ciusca@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 10:59:18 by ciusca            #+#    #+#             */
-/*   Updated: 2024/02/20 20:23:21 by ciusca           ###   ########.fr       */
+/*   Updated: 2024/02/23 19:23:22 by ciusca           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,40 +30,33 @@ int	check_sort(t_lst **sa)
 	return (0);
 }
 
-void	check_rev(char **input, int argc)
+void	check_rev(t_lst **sa, t_lst **sb)
+{
+	int		i;
+	int		count;
+	t_lst	*temp;
+
+	temp = *sa;
+	count = 1;
+	i = -1;
+	while (temp->next && ++i < ft_size(*sa))
+	{
+		if (temp->content > temp->next->content)
+			count++;
+	}
+	i = 0;
+	if (count == ft_size(*sa))
+		while (++i < ft_size(*sa))
+			pb(sa, sb);
+}
+
+void	check_sorted(char **input, int argc)
 {
 	int		i;
 	int		count;
 	t_lst	*sa;
 
 	sa = create_stack(input);
-	count = 1;
-	i = -1;
-	while (input[++i])
-	{
-		if (i == argc -1)
-			break ;
-		if (ft_atoi(input[i]) > ft_atoi(input[i + 1]))
-			count++;
-	}
-	i = 0;
-	if (count == argc)
-	{
-		while (++i < argc)
-			ra(&sa, 1);
-		free_list(&sa);
-		free_matrix(input);
-		exit(0);
-	}
-	rev_one_sort(&sa, input);
-	free_list(&sa);
-}
-
-void	check_sorted(char **input, int argc)
-{
-	int	i;
-	int	count;
-
 	count = 1;
 	i = -1;
 	while (input[++i])
@@ -78,7 +71,8 @@ void	check_sorted(char **input, int argc)
 		free_matrix(input);
 		exit(0);
 	}
-	check_rev(input, argc);
+	rev_one_sort(&sa, input);
+	free_list(&sa);
 }
 
 void	check_duplicates(char **input, int argc)
@@ -115,7 +109,7 @@ void	check_invalid(char **input, int argc)
 	{
 		n = ft_atoi(input[i]);
 		str = ft_itoa(n);
-		if (input[i][0] == '+')
+		if (input[i][0] == '+' && input[i][1] != ' ' && input[i][1])
 		{
 			free(str);
 			line = ft_itoa(n);

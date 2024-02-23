@@ -6,7 +6,7 @@
 /*   By: ciusca <ciusca@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/21 19:31:01 by ciusca            #+#    #+#             */
-/*   Updated: 2024/02/20 19:57:38 by ciusca           ###   ########.fr       */
+/*   Updated: 2024/02/23 12:56:28 by ciusca           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,8 @@ void	sa(t_lst **stk_a, int flag)
 	t_lst	*temp;
 	t_lst	*temp2;
 
+	if (ft_size(*stk_a) < 2)
+		return ;
 	temp = *stk_a;
 	temp2 = temp->next;
 	*stk_a = temp2;

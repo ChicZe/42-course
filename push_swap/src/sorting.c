@@ -6,7 +6,7 @@
 /*   By: ciusca <ciusca@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/28 15:11:04 by ciusca            #+#    #+#             */
-/*   Updated: 2024/02/20 19:59:39 by ciusca           ###   ########.fr       */
+/*   Updated: 2024/02/23 19:26:08 by ciusca           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,6 +115,7 @@ void	init_sort(char **input)
 		free_list(&stack_a);
 		exit(0);
 	}
+	check_rev(&stack_a, &stack_b);
 	sorted_arr = get_arr(&stack_a, &lis_arr);
 	stack_a = push_lis(stack_a, &stack_b, sorted_arr, lis_arr.n);
 	free_matrix(input);

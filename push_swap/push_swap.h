@@ -6,7 +6,7 @@
 /*   By: ciusca <ciusca@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 10:40:46 by ciusca            #+#    #+#             */
-/*   Updated: 2024/02/20 19:42:40 by ciusca           ###   ########.fr       */
+/*   Updated: 2024/02/23 19:22:22 by ciusca           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,7 @@ char	**ft_matrix_dup(char **mat);
 void	check_invalid(char **input, int argc);
 int		check_sort(t_lst **sa);
 void	rev_one_sort(t_lst **sa, char **input);
+void	check_rev(t_lst **sa, t_lst **sb);
 
 /* stack operations */
 void	sa(t_lst **stk_a, int flag);

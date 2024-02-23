@@ -6,7 +6,7 @@
 /*   By: ciusca <ciusca@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/20 19:43:37 by ciusca            #+#    #+#             */
-/*   Updated: 2024/02/21 11:51:41 by ciusca           ###   ########.fr       */
+/*   Updated: 2024/02/23 14:19:50 by ciusca           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,10 @@
 void	close_function(char **input, t_lst **sa, t_lst **sb, int quit)
 {
 	free_matrix(input);
-	if (ft_size(*sb) > 0 && *sb != NULL)
+	if (ft_size(*sb) > 0)
 		free_list(sb);
-	free_list(sa);
+	if (ft_size(*sa) > 0)
+		free_list(sa);
 	exit(quit);
 }
 

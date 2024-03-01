@@ -6,7 +6,7 @@
 /*   By: ciusca <ciusca@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/19 19:12:56 by ciusca            #+#    #+#             */
-/*   Updated: 2024/02/26 18:38:31 by ciusca           ###   ########.fr       */
+/*   Updated: 2024/02/27 17:53:45 by ciusca           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,10 @@
 # endif
 
 # include <stddef.h>
+# include <stdio.h>
 # include <limits.h>
 # include <stdlib.h>
+# include <string.h>
 # include <unistd.h>
 # include <stdarg.h>
 # include <stdint.h>
@@ -67,6 +69,7 @@ void	ft_putstr_fd(char *s, int fd);
 
 /* matrix functions */
 char	**ft_split(char const *s, char const c);
+void	free_matrix(char **mat);
 
 /* memory functions */
 void	ft_bzero(void *s, size_t n);
@@ -100,6 +103,5 @@ int		ft_printf(const char *str, ...);
 int		pf_putstr(char *s);
 int		hexa_converter(unsigned int n, int change);
 int		printf_hex(unsigned long long ptr);
-
 
 #endif

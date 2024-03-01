@@ -6,7 +6,7 @@
 #    By: ciusca <ciusca@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/20 15:11:47 by ciusca            #+#    #+#              #
-#    Updated: 2024/02/26 18:36:17 by ciusca           ###   ########.fr        #
+#    Updated: 2024/02/27 16:05:07 by ciusca           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,6 +19,7 @@ MANDATORY_SRCS = ft_atoi.c ft_bzero.c ft_calloc.c ft_isalnum.c ft_isalpha.c ft_i
 				./get_next_line/get_next_line.c ./get_next_line/get_next_line_utils.c ./ft_printf/printf_hex.c\
 				./ft_printf/pf_putstr.c ./ft_printf/pf_putchar.c ./ft_printf/pf_toupper.c ./ft_printf/hexa_converter.c\
 				./ft_printf/ft_printf.c ./ft_printf/ft_printf_uns.c ./ft_printf/pf_itoa.c\
+				free_matrix.c
 
 BONUS_SRCS = ft_lstnew_bonus.c ft_lstadd_front_bonus.c ft_lstsize_bonus.c ft_lstlast_bonus.c ft_lstadd_back_bonus.c ft_lstdelone_bonus.c ft_lstclear_bonus.c ft_lstiter_bonus.c ft_lstmap_bonus.c
 MANDATORY_OBJS = ${MANDATORY_SRCS:.c=.o}

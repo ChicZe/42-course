@@ -6,20 +6,20 @@
 /*   By: ciusca <ciusca@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 11:20:09 by ciusca            #+#    #+#             */
-/*   Updated: 2024/02/26 19:21:07 by ciusca           ###   ########.fr       */
+/*   Updated: 2024/02/29 18:29:30 by ciusca           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../pipex.h"
 
-int main(int argc, char **argv, char **envp)
+int	main(int argc, char **argv, char **envp)
 {
 	char	**path;
 	int		i;
+	t_args	pipex;
 
-	argv[0] = 0;
 	i = -1;
-	if (argc < 5)
+	if (argc != 5)
 		return (0);
 	while (envp[++i])
 		if (ft_strncmp(envp[i], "PATH", 4) == 0)
@@ -27,15 +27,13 @@ int main(int argc, char **argv, char **envp)
 	path = ft_split(envp[i], ':');
 	if (!path)
 		return (0);
-	path[0] = ft_strtrim(path[0], "PATH=");
-	//check_path(argv, path, envp);
-	ft_printf("path = %s\n", path[5]);
-	char *str = ft_strjoin(path[5], "/ls");
-	if (access(str, X_OK) == 0)
+	if (check_command(argv, path, &pipex) == 0)
 	{
-		ft_printf("funge!!!");
+		perror("[-]");
+		free_matrix(path);
 		return (1);
 	}
-	ft_printf("non funge\n");
+	free_matrix(path);
+	execute_command(argv, envp, &pipex);
 	return (0);
 }

@@ -1,21 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   check_execve.c                                     :+:      :+:    :+:   */
+/*   free_matrix.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ciusca <ciusca@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/26 16:39:10 by ciusca            #+#    #+#             */
-/*   Updated: 2024/02/26 18:27:42 by ciusca           ###   ########.fr       */
+/*   Created: 2024/02/27 16:03:53 by ciusca            #+#    #+#             */
+/*   Updated: 2024/02/27 17:53:36 by ciusca           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../pipex.h"
+#include "libft.h"
 
-int	check_path(char **argv, char **path, char **envp)
+void	free_matrix(char **mat)
 {
-	int		i;
-	t_args	*pipex;
+	int	i;
 
-	
+	i = -1;
+	while (mat[++i])
+		free(mat[i]);
+	free(mat);
 }

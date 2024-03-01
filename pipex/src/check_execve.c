@@ -1,31 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pipex.h                                            :+:      :+:    :+:   */
+/*   check_execve.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ciusca <ciusca@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/21 11:19:32 by ciusca            #+#    #+#             */
-/*   Updated: 2024/02/29 18:25:53 by ciusca           ###   ########.fr       */
+/*   Created: 2024/02/26 16:39:10 by ciusca            #+#    #+#             */
+/*   Updated: 2024/02/29 18:33:33 by ciusca           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PIPEX_H
-# define PIPEX_H
+#include "../pipex.h"
 
-# include "libft/libft.h"
-
-typedef struct s_args
+int	execute_command(char **argv, char **envp, t_args *pipex)
 {
-	char	**argv;
-	char	**envp;
-	char	*cmd;
-}				t_args;
+	char	**commands;
 
-/* parsing */
-int	check_command(char **argv, char **path, t_args *pipex);
-
-/* executing commands */
-int	execute_command(char **argv, char **envp, t_args *pipex);
-
-#endif
+	argv[0] = 0;
+	commands = ft_calloc(sizeof(char), 2);
+	commands[0] = ft_strdup(pipex->cmd);
+	ft_printf("path = %s\n", pipex->cmd);
+	execve(pipex->cmd, commands, envp);
+	return (1);
+}

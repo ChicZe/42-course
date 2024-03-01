@@ -6,67 +6,57 @@
 /*   By: ciusca <ciusca@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/27 14:36:15 by ciusca            #+#    #+#             */
-/*   Updated: 2024/03/01 15:15:19 by ciusca           ###   ########.fr       */
+/*   Updated: 2024/03/01 20:01:25 by ciusca           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../pipex.h"
 
-int	find_path(char **path, char *cmd)
+int	find_path(char **path, char *cmd, t_args *pipex)
 {
 	int		i;
 	char	*str;
-
+	static int		j;
+	
 	i = -1;
 	while (path[++i])
 	{
 		str = ft_strjoin(path[i], cmd);
 		if (access(str, X_OK) == 0)
 		{
+			pipex->cmd_path[j] = ft_strdup(str);
+			j++;
 			free(str);
-			break ;
+			return (i);
 		}
 		free(str);
 	}
-	if (!path[i])
-	{
-		free(cmd);
-		free_matrix(path);
-		perror("[-]");
-		return (-1);
-	}
-	return (i);
+	return (-1);
 }
 
 int	check_command(char **argv, char **path, t_args *pipex)
 {
 	char	*cmd;
 	int		i;
-	int		j;
-	char	*dup;
 
+	cmd = ft_strdup(path[0]);
+	free(path[0]);
+    path[0] = ft_strtrim(cmd, "PATH=");
+	free(cmd);
 	i = 1;
 	while (++i < 4)
 	{
 		if (!ft_strrchr(argv[i], '/'))
-		{
-			dup = ft_strjoin("/", argv[i]);
-			if (find_path(path, argv[i]) < 0)
-			{
-				perror("[-]");
-				free(dup);
-				return (0);
-			}
-			free(dup);
-		}
+			cmd = ft_strjoin("/", argv[i]);
 		else
-			cmd = ft_strdup(argv[i]);
-		if (access(cmd, X_OK) < 0)
+			cmd = argv[i];
+		if (find_path(path, cmd, pipex) < 0)
 		{
 			free(cmd);
 			return (0);
 		}
-		pipex->cmd = cmd;
+		argv[i] = ft_strtrim(cmd, "/");
+		free(cmd);
 	}
 	return (1);
 }

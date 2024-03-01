@@ -6,7 +6,7 @@
 /*   By: ciusca <ciusca@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 11:19:32 by ciusca            #+#    #+#             */
-/*   Updated: 2024/02/29 18:25:53 by ciusca           ###   ########.fr       */
+/*   Updated: 2024/03/01 19:10:51 by ciusca           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ typedef struct s_args
 {
 	char	**argv;
 	char	**envp;
-	char	*cmd;
+	char	**cmd_path;
 }				t_args;
 
 /* parsing */

@@ -6,7 +6,7 @@
 /*   By: ciusca <ciusca@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/27 14:36:15 by ciusca            #+#    #+#             */
-/*   Updated: 2024/03/01 20:01:25 by ciusca           ###   ########.fr       */
+/*   Updated: 2024/03/04 20:32:57 by ciusca           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,21 +14,27 @@
 
 int	find_path(char **path, char *cmd, t_args *pipex)
 {
-	int		i;
-	char	*str;
+	int				i;
+	char			*str;
 	static int		j;
+	char			**mat;
 	
 	i = -1;
 	while (path[++i])
 	{
 		str = ft_strjoin(path[i], cmd);
-		if (access(str, X_OK) == 0)
+		mat = ft_split(str, 32);
+		if (!mat)
+			return (-1);
+		if (access(mat[0], X_OK) == 0)
 		{
-			pipex->cmd_path[j] = ft_strdup(str);
+			pipex->cmd_path[j] = ft_strdup(mat[0]);
 			j++;
 			free(str);
+			free_matrix(mat);
 			return (i);
 		}
+		free_matrix(mat);
 		free(str);
 	}
 	return (-1);

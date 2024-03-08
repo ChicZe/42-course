@@ -6,7 +6,7 @@
 /*   By: ciusca <ciusca@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 11:20:09 by ciusca            #+#    #+#             */
-/*   Updated: 2024/03/04 21:48:38 by ciusca           ###   ########.fr       */
+/*   Updated: 2024/03/06 14:25:58 by ciusca           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ int	main(int argc, char **argv, char **envp)
 	pipex.cmd_path = ft_calloc(sizeof(char *), 3);
 	if (!pipex.cmd_path)
 		return (1);
-	if (check_command(argv, path, &pipex) == 0);
+	if (check_command(argv, path, &pipex) == 0)
 	{
 		perror("[-]");
 		free_matrix(path);

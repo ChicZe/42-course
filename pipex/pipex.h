@@ -6,7 +6,7 @@
 /*   By: ciusca <ciusca@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 11:19:32 by ciusca            #+#    #+#             */
-/*   Updated: 2024/03/04 20:44:48 by ciusca           ###   ########.fr       */
+/*   Updated: 2024/03/07 10:21:39 by ciusca           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,8 @@
 
 typedef struct s_files
 {
-	int	fds[2];
+	int	inf;
+	int	out;
 }				t_files;
 
 typedef struct s_args

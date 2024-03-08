@@ -6,7 +6,7 @@
 #    By: ciusca <ciusca@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/26 16:45:11 by ciusca            #+#    #+#              #
-#    Updated: 2024/02/29 18:21:53 by ciusca           ###   ########.fr        #
+#    Updated: 2024/03/06 14:32:33 by ciusca           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -39,9 +39,9 @@ all: $(NAME)
 $(NAME): $(OBJ)
 		make bonus -C $(LIBFT_PATH)
 		$(COMPILE) $(OBJ) $(LIBFT) -o $(NAME)
-		@echo $(RED) "______ ___________ _______   __ " $(NONE)
-		@echo $(GREEN) "| ___ \_   _| ___ \  ___\ \ / / " $(NONE)
-		@echo $(YELLOW) "| |_/ / | | | |_/ / |__  \ V /  " $(NONE)
+		@echo $(CYAN) " _____ ___________ _______   __ " $(NONE)
+		@echo $(MAGENTA) "| ___ \_   _| ___ \  ___\ \ / / " $(NONE)
+		@echo $(BLUE) "| |_/ / | | | |_/ / |__  \ V /  " $(NONE)
 		@echo $(BLUE) "|  __/  | | |  __/|  __| /   \  " $(NONE)
 		@echo $(MAGENTA) "| |    _| |_| |   | |___/ / \ \ " $(NONE)
 		@echo $(CYAN) "\_|    \___/\_|   \____/\/   \/ " $(NONE)

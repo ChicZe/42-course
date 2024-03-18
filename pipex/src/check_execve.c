@@ -6,19 +6,29 @@
 /*   By: ciusca <ciusca@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/05 16:58:18 by ciusca            #+#    #+#             */
-/*   Updated: 2024/03/07 13:53:49 by ciusca           ###   ########.fr       */
+/*   Updated: 2024/03/18 17:48:55 by ciusca           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../pipex.h"
 
-int	ft_child(char *path, char **commands, char **envp)
+int	ft_child(char *path, char **commands, char **envp, int i)
 {
 	int	fds[2];
 
 	pipe(fds);
-	if (execve(path, commands, envp) == -1)
-		ft_printf("error exec\n");
+	if (i == 2)
+	{
+		close(fds[0]);
+		dup2(fds[1], 1);
+		if (execve(path, commands, envp) == -1)
+			ft_printf("error exec\n");
+	}
+	else
+	{
+		close(fds[1]);
+		dup2(fds[0], 0);
+	}
 	return (1);
 }
 
@@ -35,13 +45,14 @@ int	execute_command(char **argv, char **envp, t_args *pipex)
 	{
 		commands = ft_split(argv[i], 32);
 		pid = fork();
-		if (pid == 0)
+		if (!pid)
 			ft_child(pipex->cmd_path[j], commands, envp);
 		else
-			wait(&pid);
+			
 		j++;
 		free_matrix(commands);
 	}
+	dup2(pipex->file.out, 1);
 	free_matrix(pipex->cmd_path);
 	return (1);
 }
@@ -63,5 +74,6 @@ int	manage_files(char **argv, int argc, t_args *pipex)
 		perror("[-]");
 		return (-1);
 	}
+	dup2(pipex->file.inf, 0);
 	return (1);
 }

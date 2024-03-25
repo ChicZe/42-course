@@ -6,15 +6,18 @@
 #    By: ciusca <ciusca@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/26 16:45:11 by ciusca            #+#    #+#              #
-#    Updated: 2024/03/06 14:32:33 by ciusca           ###   ########.fr        #
+#    Updated: 2024/03/25 18:58:55 by ciusca           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = pipex
+NAME_B = pipex_bonus
 
 SRC = pipex.c parsing.c check_execve.c
+BONUS_SRC = pipex_bonus.c parsing_bonus.c check_execve_bonus.c
 
 OBJ = $(addprefix src/, $(SRC:.c=.o))
+BONUS_OBJS = $(addprefix bonus_src/, $(BONUS_SRC:.c=.o))
 
 COMPILE = cc -Wall -Wextra -Werror -g
 
@@ -47,12 +50,30 @@ $(NAME): $(OBJ)
 		@echo $(CYAN) "\_|    \___/\_|   \____/\/   \/ " $(NONE)
 		@echo $(WHITE) "\n\n\nHow it works:" $(YELLOW) "./pipex infile cmd cmd2 outfile \n\n\n" $(NONE)
 
+bonus: $(NAME_B)
+
+%.o: %.c
+	$(COMPILE) -I $(LIBFT_PATH) -c $< -o $@
+
+$(NAME_B): $(BONUS_OBJS)
+	make bonus -C $(LIBFT_PATH)
+	$(COMPILE) $(BONUS_OBJS) $(LIBFT) -o $(NAME_B)
+	@echo $(CYAN) " _____ ___________ _______   __ " $(NONE)
+	@echo $(MAGENTA) "| ___ \_   _| ___ \  ___\ \ / / " $(NONE)
+	@echo $(BLUE) "| |_/ / | | | |_/ / |__  \ V /  " $(NONE)
+	@echo $(BLUE) "|  __/  | | |  __/|  __| /   \  " $(NONE)
+	@echo $(MAGENTA) "| |    _| |_| |   | |___/ / \ \ " $(NONE)
+	@echo $(CYAN) "\_|    \___/\_|   \____/\/   \/ " $(NONE)
+	@echo $(WHITE) "\n\n\nThis is the bonus part:" $(YELLOW) "it can handle n commands and here_doc\n" $(NONE)
+	@echo $(WHITE) "-------------------------------\\n\n" $(NONE)
+	@echo $(GREEN) "The program is called: pipex_bonus\n" $(NONE)
+
 clean:
 	@rm -rf $(OBJ)
 	@make -C $(LIBFT_PATH) clean
 
 fclean: clean
-	@rm -rf $(OBJS) $(NAME)
+	@rm -rf $(OBJS) $(NAME) $(NAME_B)
 	@make -C $(LIBFT_PATH) fclean
 
 re: fclean all

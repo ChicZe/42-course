@@ -1,16 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parsing.c                                          :+:      :+:    :+:   */
+/*   parsing_bonus.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ciusca <ciusca@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/27 14:36:15 by ciusca            #+#    #+#             */
-/*   Updated: 2024/03/25 18:19:54 by ciusca           ###   ########.fr       */
+/*   Updated: 2024/03/27 17:18:11 by ciusca           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../pipex.h"
+
+void	set_first(t_args *pipex)
+{
+	int	i;
+
+	i = -1;
+	while (++i < 2)
+		pipex->argv[i] = ft_strdup("None");
+}
 
 int	find_path(char **path, char *cmd, t_args *pipex)
 {
@@ -46,22 +55,22 @@ int	check_command(char **argv, char **path, t_args *pipex)
 	int		i;
 
 	pipex->argv = ft_calloc(sizeof(char *), pipex->argc);
+	set_first(pipex);
+	if (!pipex->argv)
+		return (0);
 	cmd = ft_strdup(path[0]);
 	free(path[0]);
 	path[0] = ft_strtrim(cmd, "PATH=");
 	free(cmd);
 	i = 1;
-	while (++i < 4)
+	while (++i < pipex->argc - 1)
 	{
 		if (!ft_strrchr(argv[i], '/'))
 			cmd = ft_strjoin("/", argv[i]);
 		else
 			cmd = argv[i];
 		if (find_path(path, cmd, pipex) < 0)
-		{
-			free(cmd);
-			return (0);
-		}
+			return (free(cmd), 0);
 		pipex->argv[i] = ft_strtrim(cmd, "/");
 		free(cmd);
 	}

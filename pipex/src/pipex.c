@@ -6,17 +6,27 @@
 /*   By: ciusca <ciusca@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 11:20:09 by ciusca            #+#    #+#             */
-/*   Updated: 2024/03/25 18:46:06 by ciusca           ###   ########.fr       */
+/*   Updated: 2024/03/27 13:49:53 by ciusca           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../pipex.h"
 
-void	free_things(t_args *pipex, char **path)
+void	free_argv(t_args *pipex, char **argv)
 {
-	free_matrix(pipex->argv);
+	int	i;
+
+	i = 1;
+	while (++i < pipex->argc - 1)
+		free(argv[i]);
+}
+
+void	free_things(t_args *pipex, char **matrix)
+{
 	free_matrix(pipex->cmd_path);
-	free_matrix(path);
+	free_matrix(matrix);
+	free_matrix(pipex->argv);
+	exit(1);
 }
 
 int	get_envp(char **envp, t_args *pipex)
@@ -37,7 +47,7 @@ int	main(int argc, char **argv, char **envp)
 	t_args	pipex;
 	int		i;
 
-	if (argc != 5)
+	if (argc < 5)
 		return (0);
 	if (manage_files(argv, argc, &pipex) == -1)
 		return (1);
@@ -52,7 +62,6 @@ int	main(int argc, char **argv, char **envp)
 	{
 		perror("[-]");
 		free_things(&pipex, path);
-		return (1);
 	}
 	free_matrix(path);
 	execute_command(&pipex);

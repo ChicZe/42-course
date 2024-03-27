@@ -6,7 +6,7 @@
 #    By: ciusca <ciusca@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/26 16:45:11 by ciusca            #+#    #+#              #
-#    Updated: 2024/03/25 18:58:55 by ciusca           ###   ########.fr        #
+#    Updated: 2024/03/27 13:48:49 by ciusca           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -70,10 +70,11 @@ $(NAME_B): $(BONUS_OBJS)
 
 clean:
 	@rm -rf $(OBJ)
+	@rm -rf $(BONUS_OBJS)
 	@make -C $(LIBFT_PATH) clean
 
 fclean: clean
-	@rm -rf $(OBJS) $(NAME) $(NAME_B)
+	@rm -rf $(OBJS) $(BONUS_OBJS) $(NAME) $(NAME_B)
 	@make -C $(LIBFT_PATH) fclean
 
 re: fclean all

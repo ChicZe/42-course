@@ -6,7 +6,7 @@
 /*   By: ciusca <ciusca@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 11:19:32 by ciusca            #+#    #+#             */
-/*   Updated: 2024/03/25 18:10:03 by ciusca           ###   ########.fr       */
+/*   Updated: 2024/03/27 13:47:27 by ciusca           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,12 +33,15 @@ typedef struct s_args
 }				t_args;
 
 /* parsing */
-int	check_command(char **argv, char **path, t_args *pipex);
+int		check_command(char **argv, char **path, t_args *pipex);
 
 /* managing files */
-int	manage_files(char **argv, int argc, t_args *pipex);
+int		manage_files(char **argv, int argc, t_args *pipex);
 
 /* executing commands */
-int	execute_command(t_args *pipex);
+int		execute_command(t_args *pipex);
+
+/* utils */
+void	free_things(t_args *pipex, char **matrix);
 
 #endif

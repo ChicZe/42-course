@@ -6,11 +6,63 @@
 /*   By: ciusca <ciusca@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 11:20:09 by ciusca            #+#    #+#             */
-/*   Updated: 2024/03/27 17:42:15 by ciusca           ###   ########.fr       */
+/*   Updated: 2024/03/29 16:47:07 by ciusca           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../pipex.h"
+
+void	ft_read_heredoc(char **argv, int fds[2])
+{
+	char	*line;
+
+	line = get_next_line(0);
+	close(fds[0]);
+	while (line)
+		{
+			if (ft_strlen(argv[2]) == 0)
+				argv[2] = "\n";
+			if (ft_strncmp(line, argv[2], ft_strlen(argv[2])) == 0)
+			{
+				free(line);
+				close(fds[1]);
+				exit(0);
+			}
+			write (fds[1], line, ft_strlen(line));
+			free(line);
+			line = get_next_line(0);
+		}
+	free(line);
+}
+
+void	ft_here_doc(char **argv, int argc, t_args *pipex)
+{
+	int		fds[2];
+	int		pid;
+	
+	if (argc < 6)
+		exit (1);
+	if (pipe(fds) == -1)
+		exit (1);
+	pipex->argc = argc;
+	pipex->i = 2;
+	pid = fork();
+	if (pid == 0)
+		ft_read_heredoc(argv, fds);
+	else
+	{
+		close(fds[1]);
+		dup2(fds[0], STDIN_FILENO);
+		wait(NULL);
+	}
+	pipex->file.out = open(argv[argc - 1], O_WRONLY | O_CREAT | O_TRUNC, 0777);
+	if (pipex->file.out < 0)
+	{
+		perror("[-]");
+		exit (1);
+	}
+	close(fds[0]);
+}
 
 void	free_argv(t_args *pipex, char **argv)
 {
@@ -21,24 +73,16 @@ void	free_argv(t_args *pipex, char **argv)
 		free(argv[i]);
 }
 
-void	free_things(t_args *pipex, char **matrix)
+void	free_things(t_args *pipex, char **matrix, int ex)
 {
 	free_matrix(pipex->cmd_path);
 	free_matrix(matrix);
 	free_matrix(pipex->argv);
-	exit(1);
-}
-
-int	get_envp(char **envp, t_args *pipex)
-{
-	int	i;
-
-	i = -1;
-	while (envp[++i])
-		if (ft_strncmp(envp[i], "PATH", 4) == 0)
-			break ;
-	pipex->envp = envp;
-	return (i);
+	if (ex == 1)
+	{
+		perror("[-]");
+		exit(1);
+	}
 }
 
 int	main(int argc, char **argv, char **envp)
@@ -49,9 +93,13 @@ int	main(int argc, char **argv, char **envp)
 
 	if (argc < 5)
 		return (0);
-	if (manage_files(argv, argc, &pipex) == -1)
+	if (ft_strncmp(argv[1], "here_doc", ft_strlen(argv[1])) == 0)
+		ft_here_doc(argv, argc, &pipex);
+	else if (manage_files(argv, argc, &pipex) == -1)
 		return (1);
 	i = get_envp(envp, &pipex);
+	if (i == -1)
+		return (1);
 	path = ft_split(envp[i], ':');
 	if (!path)
 		return (0);
@@ -59,10 +107,7 @@ int	main(int argc, char **argv, char **envp)
 	if (!pipex.cmd_path)
 		return (1);
 	if (check_command(argv, path, &pipex) == 0)
-	{
-		perror("[-]");
-		free_things(&pipex, path);
-	}
+		free_things(&pipex, path, 1);
 	free_matrix(path);
 	execute_command(&pipex);
 	return (0);

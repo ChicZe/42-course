@@ -6,18 +6,32 @@
 /*   By: ciusca <ciusca@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/27 14:36:15 by ciusca            #+#    #+#             */
-/*   Updated: 2024/03/27 17:18:11 by ciusca           ###   ########.fr       */
+/*   Updated: 2024/03/29 16:37:08 by ciusca           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../pipex.h"
+
+int	get_envp(char **envp, t_args *pipex)
+{
+	int	i;
+
+	i = -1;
+	while (envp[++i])
+		if (ft_strncmp(envp[i], "PATH", 4) == 0)
+		{
+			pipex->envp = envp;
+			return (i);	
+		}
+	return (-1);
+}
 
 void	set_first(t_args *pipex)
 {
 	int	i;
 
 	i = -1;
-	while (++i < 2)
+	while (++i < pipex->i + 1)
 		pipex->argv[i] = ft_strdup("None");
 }
 
@@ -54,6 +68,7 @@ int	check_command(char **argv, char **path, t_args *pipex)
 	char	*cmd;
 	int		i;
 
+	i = pipex->i;
 	pipex->argv = ft_calloc(sizeof(char *), pipex->argc);
 	set_first(pipex);
 	if (!pipex->argv)
@@ -62,7 +77,7 @@ int	check_command(char **argv, char **path, t_args *pipex)
 	free(path[0]);
 	path[0] = ft_strtrim(cmd, "PATH=");
 	free(cmd);
-	i = 1;
+	
 	while (++i < pipex->argc - 1)
 	{
 		if (!ft_strrchr(argv[i], '/'))
@@ -70,7 +85,11 @@ int	check_command(char **argv, char **path, t_args *pipex)
 		else
 			cmd = argv[i];
 		if (find_path(path, cmd, pipex) < 0)
+		{
+			ft_printf("i = %d\n", pipex->argc);
+			ft_printf("cmd = %s\n", cmd);
 			return (free(cmd), 0);
+		}
 		pipex->argv[i] = ft_strtrim(cmd, "/");
 		free(cmd);
 	}

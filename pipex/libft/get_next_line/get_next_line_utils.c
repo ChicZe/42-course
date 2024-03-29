@@ -6,7 +6,7 @@
 /*   By: ciusca <ciusca@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/10 19:08:35 by ciusca            #+#    #+#             */
-/*   Updated: 2024/03/01 15:21:28 by ciusca           ###   ########.fr       */
+/*   Updated: 2024/03/29 15:10:21 by ciusca           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,18 +48,3 @@ char	*ft_substr(const char *s, unsigned int start, size_t len)
 	return (substr);
 }
 
-void	*ft_calloc(size_t nitems, size_t size)
-{
-	char	*arr;
-	int		i;
-
-	i = -1;
-	if (nitems != 0 && size > ULONG_MAX / nitems)
-		return (NULL);
-	arr = (void *)malloc(size * nitems);
-	if (arr == NULL)
-		return (NULL);
-	while ((size_t)++i < nitems * size)
-		arr[i] = 0;
-	return (arr);
-}

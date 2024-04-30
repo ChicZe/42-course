@@ -6,13 +6,11 @@
 /*   By: ciusca <ciusca@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/16 10:55:46 by ciusca            #+#    #+#             */
-/*   Updated: 2024/04/25 18:06:13 by ciusca           ###   ########.fr       */
+/*   Updated: 2024/04/30 17:29:22 by ciusca           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../header/philo.h"
-
-int	count = 0;
 
 void	*ft_routine(void *args)
 {
@@ -23,14 +21,16 @@ void	*ft_routine(void *args)
 	arg = philo->args;
 	if (philo->id % 2 != 0)
 		usleep(10000);
-	while (check_death(philo))
+	while (1)
 	{
 		philo_eat(philo);
 		// check n_of_meals
 		print_philo(philo, SLEEP);
 		ft_usleep(arg->time_to_sleep);
 		print_philo(philo, THINK);
+		check_death(philo);
 	}
+	exit(1);
 	return (0);
 }
 
@@ -40,6 +40,7 @@ int	starting_threads(t_args *args)
 
 	i = -1;
 	i = -1;
+	args->initial_time = get_current_time();
 	while (++i < args->n_philo)
 	{
 		//args->philo[i].thread_id = args->tid[i];`
@@ -61,6 +62,8 @@ int	init_mutex(t_args *args)
 		if (pthread_mutex_init(&args->fork[i], 0))
 			return (ft_error("failed to initialize mutex", 0));
 	}
+	if (pthread_mutex_init(&args->lock, 0))
+		return (ft_error("failed to initialize mutex", 0));
 	if (pthread_mutex_init(&args->print_lock, 0))
 		return (ft_error("failed to initialize mutex", 0));
 	return (1);
@@ -81,13 +84,12 @@ int	init_philo(t_args *args)
 	return (1);
 }
 
-
-
 int	ft_init(t_args *args)
 {
 	int	i;
 
 	i = -1;
+	args->is_dead = 0;
 	args->n_philo = ft_atoi(args->argv[1]);
 	args->time_to_death = ft_atoi(args->argv[2]);
 	args->time_to_eat = ft_atoi(args->argv[3]);

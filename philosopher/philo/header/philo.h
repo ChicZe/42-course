@@ -6,7 +6,7 @@
 /*   By: ciusca <ciusca@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/06 15:12:05 by ciusca            #+#    #+#             */
-/*   Updated: 2024/04/25 18:06:55 by ciusca           ###   ########.fr       */
+/*   Updated: 2024/04/30 17:29:38 by ciusca           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,9 +58,10 @@ typedef struct s_args
 	int				meals_limit;
 	int				is_dead;
 	int				n_philo;
+	long long		initial_time;
 	pthread_t		*tid;
 	pthread_mutex_t	*fork;
-	pthread_mutex_t	*lock;
+	pthread_mutex_t	lock;
 	pthread_mutex_t	print_lock;
 	t_philo			*philo;
 }				t_args;
@@ -77,7 +78,7 @@ int	init_mutex(t_args *args);
 int	check_args(char **argv);
 
 /* utils */
-size_t	get_current_time(void);
+long long	get_current_time(void);
 
 /* philo actions */
 void	philo_eat(t_philo *philo);

@@ -6,13 +6,11 @@
 /*   By: ciusca <ciusca@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/05 16:58:18 by ciusca            #+#    #+#             */
-/*   Updated: 2024/03/29 16:19:22 by ciusca           ###   ########.fr       */
+/*   Updated: 2024/04/05 16:57:19 by ciusca           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../pipex.h"
-
-
 
 int	ft_child(char *path, t_args *pipex, char **commands, int pid)
 {

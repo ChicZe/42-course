@@ -6,7 +6,7 @@
 /*   By: ciusca <ciusca@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/05 16:58:18 by ciusca            #+#    #+#             */
-/*   Updated: 2024/03/29 14:52:46 by ciusca           ###   ########.fr       */
+/*   Updated: 2024/06/03 12:24:15 by ciusca           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,5 +101,6 @@ int	manage_files(char **argv, int argc, t_args *pipex)
 	pipex->argc = argc;
 	dup2(pipex->file.inf, 0);
 	close(pipex->file.inf);
+	//printf("suca\n");
 	return (1);
 }

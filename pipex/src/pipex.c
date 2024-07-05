@@ -6,7 +6,7 @@
 /*   By: ciusca <ciusca@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 11:20:09 by ciusca            #+#    #+#             */
-/*   Updated: 2024/03/29 14:05:28 by ciusca           ###   ########.fr       */
+/*   Updated: 2024/04/09 19:33:08 by ciusca           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,11 +39,13 @@ int	get_envp(char **envp, t_args *pipex)
 
 	i = -1;
 	while (envp[++i])
+	{
 		if (ft_strncmp(envp[i], "PATH", 4) == 0)
 		{
 			pipex->envp = envp;
 			return (i);
 		}
+	}
 	return (-1);
 }
 

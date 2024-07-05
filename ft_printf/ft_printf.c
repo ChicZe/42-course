@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ciusca <cristianiusca13@gmail.com>         +#+  +:+       +#+        */
+/*   By: ciusca <ciusca@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/31 13:58:19 by ciusca            #+#    #+#             */
-/*   Updated: 2023/11/10 16:06:20 by ciusca           ###   ########.fr       */
+/*   Updated: 2024/05/24 12:57:17 by ciusca           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,13 +73,3 @@ int	ft_printf(const char *str, ...)
 	va_end(arg);
 	return (count);
 }
-
-/*int	main(void)
-{
-
-	//ft_printf("ft:%%\n");
-	int i = ft_printf("ft:%% %%%s", "ciao");
-	//printf("re:%%\n");
-	//int j = printf("re:%% %%");
-	//printf("ft: %d", i);
-}*/

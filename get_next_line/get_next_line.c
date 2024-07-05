@@ -6,7 +6,7 @@
 /*   By: ciusca <ciusca@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 19:26:10 by ciusca            #+#    #+#             */
-/*   Updated: 2023/12/04 17:26:08 by ciusca           ###   ########.fr       */
+/*   Updated: 2024/03/18 16:04:28 by ciusca           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,7 +120,7 @@ char	*get_next_line(int fd)
 		free(line);
 	return (line);
 }
-/*#include <fcntl.h>
+#include <fcntl.h>
 int	main(void)
 {
 	int		fd;
@@ -138,4 +138,4 @@ int	main(void)
 	free(next_line);
 	close(fd);
 	return (0);
-}*/
+}

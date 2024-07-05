@@ -6,7 +6,7 @@
 /*   By: ciusca <ciusca@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/27 14:36:15 by ciusca            #+#    #+#             */
-/*   Updated: 2024/03/29 16:37:08 by ciusca           ###   ########.fr       */
+/*   Updated: 2024/04/05 16:59:20 by ciusca           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,11 +18,13 @@ int	get_envp(char **envp, t_args *pipex)
 
 	i = -1;
 	while (envp[++i])
+	{
 		if (ft_strncmp(envp[i], "PATH", 4) == 0)
 		{
 			pipex->envp = envp;
-			return (i);	
+			return (i);
 		}
+	}
 	return (-1);
 }
 
@@ -77,7 +79,6 @@ int	check_command(char **argv, char **path, t_args *pipex)
 	free(path[0]);
 	path[0] = ft_strtrim(cmd, "PATH=");
 	free(cmd);
-	
 	while (++i < pipex->argc - 1)
 	{
 		if (!ft_strrchr(argv[i], '/'))
@@ -85,11 +86,7 @@ int	check_command(char **argv, char **path, t_args *pipex)
 		else
 			cmd = argv[i];
 		if (find_path(path, cmd, pipex) < 0)
-		{
-			ft_printf("i = %d\n", pipex->argc);
-			ft_printf("cmd = %s\n", cmd);
 			return (free(cmd), 0);
-		}
 		pipex->argv[i] = ft_strtrim(cmd, "/");
 		free(cmd);
 	}

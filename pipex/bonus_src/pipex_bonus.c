@@ -6,7 +6,7 @@
 /*   By: ciusca <ciusca@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 11:20:09 by ciusca            #+#    #+#             */
-/*   Updated: 2024/03/29 16:47:07 by ciusca           ###   ########.fr       */
+/*   Updated: 2024/04/09 19:32:20 by ciusca           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,23 +15,25 @@
 void	ft_read_heredoc(char **argv, int fds[2])
 {
 	char	*line;
+	char	*limiter;
 
 	line = get_next_line(0);
 	close(fds[0]);
 	while (line)
+	{
+		limiter = ft_strjoin(argv[2], "\n");
+		if (ft_strncmp(line, limiter, ft_strlen(limiter)) == 0)
 		{
-			if (ft_strlen(argv[2]) == 0)
-				argv[2] = "\n";
-			if (ft_strncmp(line, argv[2], ft_strlen(argv[2])) == 0)
-			{
-				free(line);
-				close(fds[1]);
-				exit(0);
-			}
-			write (fds[1], line, ft_strlen(line));
 			free(line);
-			line = get_next_line(0);
+			free(limiter);
+			close(fds[1]);
+			exit(0);
 		}
+		free(limiter);
+		write (fds[1], line, ft_strlen(line));
+		free(line);
+		line = get_next_line(0);
+	}
 	free(line);
 }
 
@@ -39,7 +41,7 @@ void	ft_here_doc(char **argv, int argc, t_args *pipex)
 {
 	int		fds[2];
 	int		pid;
-	
+
 	if (argc < 6)
 		exit (1);
 	if (pipe(fds) == -1)

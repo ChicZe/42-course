@@ -6,17 +6,16 @@
 #    By: ciusca <ciusca@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/04/06 15:52:36 by ciusca            #+#    #+#              #
-#    Updated: 2024/04/25 11:19:31 by ciusca           ###   ########.fr        #
+#    Updated: 2024/07/05 16:02:39 by ciusca           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = philo
 
-SRC = philo.c routine.c parsing.c philo_actions.c utils.c
-
+SRC = philo.c routine.c parsing.c philo_actions.c utils.c lib_func.c
 OBJ = $(addprefix src/, $(SRC:.c=.o))
 
-COMPILE = cc -Wall -Wextra -Werror -pthread
+COMPILE = cc -Wall -Wextra -Werror -g -pthread
 
 LIBFT_PATH = libft
 LIBFT_A = libft.a
@@ -37,27 +36,35 @@ all: $(NAME)
 		$(COMPILE) -I $(LIBFT_PATH) -c $< -o $@
 
 $(NAME): $(OBJ)
-		make bonus -C $(LIBFT_PATH)
-		$(COMPILE) $(OBJ) $(LIBFT) -o $(NAME)                               
+		$(COMPILE) $(OBJ) -o $(NAME)                               
 		@echo $(CYAN) " _______ ____  ____ _____ _____      ___  " $(NONE)
 		@echo $(WHITE) "|_   __ \_   ||   _|_   _|_   _|   .'   .  " $(NONE)
 		@echo $(CYAN) "  | |__) || |__| |   | |   | |    /  .-.  \  " $(NONE)
 		@echo $(CYAN) "  |  ___/ |  __  |   | |   | |   _| |   | |  " $(NONE)
-		@echo $(WHITE) " _| |_   _| |  | |_ _| |_ _| |__/   -'  " $(NONE)
+		@echo $(WHITE) " _| |_   _| |  | |_ _| |_ _| |__/   -'_ / |" $(NONE)
 		@echo $(CYAN) "|_____| |____||____|_____|________| .___.'" $(NONE)
 		@echo "\n\n"
+
+min: all
+	@rm -rf $(OBJ)
+	@rm -rf $(BONUS_OBJS)
+
+help:
+	@echo "test"
 
 clean:
 	@rm -rf $(OBJ)
 	@rm -rf $(BONUS_OBJS)
-	@make -C $(LIBFT_PATH) clean
 	@echo $(GREEN) "\nCLEAN COMPLETED\n" $(NONE)
 
 fclean: clean
 	@rm -rf $(OBJS) $(BONUS_OBJS) $(NAME) $(NAME_B)
-	@make -C $(LIBFT_PATH) fclean
 	
 re: fclean all
+
+.DEFAULT:
+	@echo "\nNo rule called: '\033[1;31m$@\033[0m'\n\
+	Type: \"\033[1;32mmake help\033[0m\" for more informations\n"
 
 .PHONY: all clean fclean re
 

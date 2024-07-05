@@ -6,7 +6,7 @@
 /*   By: ciusca <ciusca@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/06 15:11:17 by ciusca            #+#    #+#             */
-/*   Updated: 2024/04/25 12:28:50 by ciusca           ###   ########.fr       */
+/*   Updated: 2024/07/05 17:10:55 by ciusca           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int	main(int argc, char **argv)
 
 	args.argv = argv;
 	if (argc < 5 || argc > 6)
-		return (ft_error("no valid arguments\n", 1));
+		return (1);
 	if (!(check_args(argv)))
 		return (1);
 	if (!(ft_init(&args)))

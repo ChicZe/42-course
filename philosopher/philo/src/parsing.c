@@ -6,16 +6,25 @@
 /*   By: ciusca <ciusca@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/15 11:44:12 by ciusca            #+#    #+#             */
-/*   Updated: 2024/04/25 16:17:15 by ciusca           ###   ########.fr       */
+/*   Updated: 2024/07/05 17:18:33 by ciusca           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../header/philo.h"
 
-int	ft_error(char *str, int quit)
+int	ft_error(char *str)
 {
-	printf("%s\n", str);
-	return (quit);
+	write(2, str, ft_strlen(str));
+	return (0);
+}
+
+int	check_time(int	time, int i)
+{
+	if (i == 1 && (time > 200 || time == 0))
+		return (ft_error("Invalid philos!\n"));
+	else if (i != 1 && i != 5 && time < 60)
+		return (ft_error("Invalid time!\n"));
+	return (1);
 }
 
 int	check_args(char **argv)
@@ -32,11 +41,11 @@ int	check_args(char **argv)
 		if (ft_strncmp(str, argv[i], ft_strlen(argv[i])) != 0)
 		{
 			free(str);
-			printf(YELLOW);
-			return (ft_error("\ninvalid argument!\n", 0));
-			printf(NONE);
+			return (ft_error("Invalid arguments!\n"));
 		}
 		free(str);
+		if (!check_time(time, i))
+			return (0);
 	}
 	return (1);
 }

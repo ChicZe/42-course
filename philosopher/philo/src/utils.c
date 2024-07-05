@@ -6,13 +6,13 @@
 /*   By: ciusca <ciusca@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 11:43:52 by ciusca            #+#    #+#             */
-/*   Updated: 2024/04/30 17:26:50 by ciusca           ###   ########.fr       */
+/*   Updated: 2024/07/04 15:19:37 by ciusca           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../header/philo.h"
 
-long long	get_current_time(void)
+long long	get_current_time()
 {
 	struct timeval	time;
 

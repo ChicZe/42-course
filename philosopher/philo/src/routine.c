@@ -6,11 +6,21 @@
 /*   By: ciusca <ciusca@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/16 10:55:46 by ciusca            #+#    #+#             */
-/*   Updated: 2024/04/30 17:29:22 by ciusca           ###   ########.fr       */
+/*   Updated: 2024/07/05 16:51:30 by ciusca           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../header/philo.h"
+
+int		death_status(t_args *arg)
+{
+	int	ret;
+	
+	pthread_mutex_lock(&arg->lock);
+	ret = arg->is_dead;
+	pthread_mutex_unlock(&arg->lock);
+	return (ret);
+}
 
 void	*ft_routine(void *args)
 {
@@ -19,21 +29,43 @@ void	*ft_routine(void *args)
 
 	philo = (t_philo *)args;
 	arg = philo->args;
-	if (philo->id % 2 != 0)
-		usleep(10000);
+	if (philo->id % 2 == 0)
+	{
+		print_philo(philo, THINK);
+		ft_usleep(10);
+	}
 	while (1)
 	{
-		philo_eat(philo);
+		
+		//printf("ciao\n");
+		if (!philo_eat(philo))
+			break ;
 		// check n_of_meals
 		print_philo(philo, SLEEP);
 		ft_usleep(arg->time_to_sleep);
-		print_philo(philo, THINK);
-		check_death(philo);
+		if (!print_philo(philo, THINK))
+			break ;
 	}
-	exit(1);
 	return (0);
 }
 
+int	exit_threads(t_args *args)
+{
+	int	i;
+	
+	free(args->tid);
+	i = -1;
+	while (++i < args->n_philo)
+	{
+		pthread_mutex_destroy(&args->fork[i]);
+	}
+	pthread_mutex_destroy(&args->lock);
+	pthread_mutex_destroy(&args->print_lock);
+	pthread_mutex_destroy(&args->eat_lock);
+	free(args->fork);
+	free(args->philo);
+	return (1);
+}
 int	starting_threads(t_args *args)
 {
 	int	i;
@@ -43,14 +75,18 @@ int	starting_threads(t_args *args)
 	args->initial_time = get_current_time();
 	while (++i < args->n_philo)
 	{
-		//args->philo[i].thread_id = args->tid[i];`
+		args->philo[i].last_meal = args->initial_time;
 		if (pthread_create(&args->tid[i], 0, &ft_routine, &args->philo[i]))
 			return (ft_error("failed to create thread\n", 0));
 	}
+	check_death(args->philo);
 	i = -1;
 	while (++i < args->n_philo)
+	{
 		if (pthread_join(args->tid[i], 0))
 			return (ft_error("pthread_join failed\n", 0));
+	}
+	exit_threads(args);
 	return (1);
 }
 
@@ -66,6 +102,8 @@ int	init_mutex(t_args *args)
 		return (ft_error("failed to initialize mutex", 0));
 	if (pthread_mutex_init(&args->print_lock, 0))
 		return (ft_error("failed to initialize mutex", 0));
+	if (pthread_mutex_init(&args->eat_lock, 0))
+		return (ft_error("failed to initialize mutex", 0));
 	return (1);
 }
 
@@ -80,6 +118,8 @@ int	init_philo(t_args *args)
 		args->philo[i].last_meal = 0;
 		args->philo[i].args = args;
 		args->philo[i].philo_ate = 0;
+		args->philo[i].death_status = 0;
+		args->philo[i].is_eating = 0;
 	}
 	return (1);
 }
@@ -94,6 +134,7 @@ int	ft_init(t_args *args)
 	args->time_to_death = ft_atoi(args->argv[2]);
 	args->time_to_eat = ft_atoi(args->argv[3]);
 	args->time_to_sleep = ft_atoi(args->argv[4]);
+	args->curr_time = 0;
 	args->fork = malloc(sizeof(pthread_mutex_t) * args->n_philo);
 	if (!args->fork)
 		return (ft_error("allocation fail\n", 0));

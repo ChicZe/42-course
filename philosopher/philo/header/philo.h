@@ -6,7 +6,7 @@
 /*   By: ciusca <ciusca@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/06 15:12:05 by ciusca            #+#    #+#             */
-/*   Updated: 2024/04/30 17:29:38 by ciusca           ###   ########.fr       */
+/*   Updated: 2024/07/05 17:11:05 by ciusca           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,9 +41,10 @@ typedef struct s_philo
 	int					id;
 	int					left_fork;
 	int					right_fork;
+	int					death_status;
+	int					is_eating;
 	long long			last_meal;
 	int					philo_ate;
-	pthread_t			thread_id;
 	struct s_args			*args;
 }				t_philo;
 
@@ -52,6 +53,7 @@ typedef struct s_args
 {
 	int				argc;
 	char			**argv;
+	int				curr_time;
 	int				time_to_eat;
 	int				time_to_sleep;
 	int				time_to_death;
@@ -60,6 +62,7 @@ typedef struct s_args
 	int				n_philo;
 	long long		initial_time;
 	pthread_t		*tid;
+	pthread_mutex_t	eat_lock;
 	pthread_mutex_t	*fork;
 	pthread_mutex_t	lock;
 	pthread_mutex_t	print_lock;
@@ -67,29 +70,34 @@ typedef struct s_args
 }				t_args;
 
 /* writes a message and return and integer passed as the second argument */
-int	ft_error(char *str, int quit);
+//
 
 /* init struct && routine */
-int	ft_init(t_args *args);
-int	starting_threads(t_args *args);
-int	init_mutex(t_args *args);
+int			ft_init(t_args *args);
+int			starting_threads(t_args *args);
+int			init_mutex(t_args *args);
 
 /* checking for valid input */
-int	check_args(char **argv);
+int			check_args(char **argv);
 
 /* utils */
 long long	get_current_time(void);
+int			death_status(t_args *arg);
+int			exit_threads(t_args *args);
 
 /* philo actions */
-void	philo_eat(t_philo *philo);
-int		ft_usleep(size_t milliseconds);
-void	print_philo(t_philo *philo, char *action);
-int		check_death(t_philo *philo);
+int			philo_eat(t_philo *philo);
+int			ft_usleep(size_t milliseconds);
+int			print_philo(t_philo *philo, char *action);
+int			check_death(t_philo *philo);
 
 /* lib functions */
-char	*ft_itoa(int n);
-int		ft_strncmp(const char *s1, const char *s2, size_t n);
-int		ft_atoi(const char *str);
-int		ft_strlen(char *str);
+char		*ft_itoa(int n);
+int			ft_strncmp(const char *s1, const char *s2, size_t n);
+int			ft_atoi(const char *str);
+int			ft_strlen(char *str);
+
+/* exit */
+void		exit_function(t_philo *philo);
 
 #endif

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   routine.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ciusca <ciusca@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ciusca <ciusca@student.42firenze.it>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/16 10:55:46 by ciusca            #+#    #+#             */
-/*   Updated: 2024/07/05 16:51:30 by ciusca           ###   ########.fr       */
+/*   Updated: 2024/07/08 19:28:34 by ciusca           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,14 +77,14 @@ int	starting_threads(t_args *args)
 	{
 		args->philo[i].last_meal = args->initial_time;
 		if (pthread_create(&args->tid[i], 0, &ft_routine, &args->philo[i]))
-			return (ft_error("failed to create thread\n", 0));
+			return (ft_error("failed to create thread\n"));
 	}
 	check_death(args->philo);
 	i = -1;
 	while (++i < args->n_philo)
 	{
 		if (pthread_join(args->tid[i], 0))
-			return (ft_error("pthread_join failed\n", 0));
+			return (ft_error("pthread_join failed\n"));
 	}
 	exit_threads(args);
 	return (1);
@@ -96,14 +96,14 @@ int	init_mutex(t_args *args)
 	while (++i < args->n_philo)
 	{
 		if (pthread_mutex_init(&args->fork[i], 0))
-			return (ft_error("failed to initialize mutex", 0));
+			return (ft_error("failed to initialize mutex"));
 	}
 	if (pthread_mutex_init(&args->lock, 0))
-		return (ft_error("failed to initialize mutex", 0));
+		return (ft_error("failed to initialize mutex"));
 	if (pthread_mutex_init(&args->print_lock, 0))
-		return (ft_error("failed to initialize mutex", 0));
+		return (ft_error("failed to initialize mutex"));
 	if (pthread_mutex_init(&args->eat_lock, 0))
-		return (ft_error("failed to initialize mutex", 0));
+		return (ft_error("failed to initialize mutex"));
 	return (1);
 }
 
@@ -137,14 +137,14 @@ int	ft_init(t_args *args)
 	args->curr_time = 0;
 	args->fork = malloc(sizeof(pthread_mutex_t) * args->n_philo);
 	if (!args->fork)
-		return (ft_error("allocation fail\n", 0));
+		return (ft_error("allocation fail\n"));
 	args->tid = malloc(sizeof(pthread_t) * args->n_philo);
 	if (!args->tid)
-		return (ft_error("allocation fail\n", 0));	
+		return (ft_error("allocation fail\n"));	
 	args->philo = malloc(sizeof(t_philo) * args->n_philo);
 	if (!args->philo)
-		return (ft_error("allocation fail\n", 0));
+		return (ft_error("allocation fail\n"));
 	if (!(init_philo(args)))
-		return (ft_error("failed to initialize", 0));
+		return (ft_error("failed to initialize"));
 	return (1);
 }

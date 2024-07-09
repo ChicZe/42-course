@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ciusca <ciusca@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ciusca <ciusca@student.42firenze.it>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/06 15:12:05 by ciusca            #+#    #+#             */
-/*   Updated: 2024/07/05 17:11:05 by ciusca           ###   ########.fr       */
+/*   Updated: 2024/07/08 19:27:37 by ciusca           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,6 +84,7 @@ int			check_args(char **argv);
 long long	get_current_time(void);
 int			death_status(t_args *arg);
 int			exit_threads(t_args *args);
+int			ft_error(char *str);
 
 /* philo actions */
 int			philo_eat(t_philo *philo);

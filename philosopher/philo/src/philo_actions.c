@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo_actions.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ciusca <ciusca@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ciusca <ciusca@student.42firenze.it>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 11:38:16 by ciusca            #+#    #+#             */
-/*   Updated: 2024/07/05 16:54:28 by ciusca           ###   ########.fr       */
+/*   Updated: 2024/07/09 17:06:12 by ciusca           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,27 +44,32 @@ int	philo_eat(t_philo *philo)
 	int first_fork = philo->right_fork;
 	int second_fork = philo->left_fork;
 
-	if (first_fork > second_fork) {
+	if (first_fork > second_fork)
+	{
     	first_fork = philo->left_fork;
    	 	second_fork = philo->right_fork;
 	}
-
 	pthread_mutex_lock(&args->fork[first_fork]);
 	print_philo(philo, TAKEN_FORK);
+	if (args->n_philo == 1)
+	{
+		pthread_mutex_unlock(&args->fork[first_fork]);
+		return (0);
+	}
 	pthread_mutex_lock(&args->fork[second_fork]);
 	print_philo(philo, TAKEN_FORK);
+	philo->is_eating = 1;
 	if (!print_philo(philo, EAT))
 	{
 		pthread_mutex_unlock(&args->fork[first_fork]);
 		pthread_mutex_unlock(&args->fork[second_fork]);
 		return (0);
 	}
-	philo->is_eating = 1;
 	ft_usleep(args->time_to_eat);
-	pthread_mutex_lock(&args->print_lock);
-	philo->last_meal = get_current_time();
-	pthread_mutex_unlock(&args->print_lock);
 	philo->is_eating = 0;
+	pthread_mutex_lock(&args->eat_lock);
+	philo->last_meal = get_current_time();
+	pthread_mutex_unlock(&args->eat_lock);
 	pthread_mutex_unlock(&args->fork[second_fork]);
 	pthread_mutex_unlock(&args->fork[first_fork]);
 	return (1);
@@ -85,7 +90,7 @@ int	check_death(t_philo *philo)
 			pthread_mutex_lock(&args->print_lock);
 			time = get_current_time();
 			pthread_mutex_unlock(&args->print_lock);
-			if ((time - philo[i].last_meal) > args->time_to_death && !philo[i].is_eating)
+			if ((time - philo[i].last_meal) > args->time_to_death) //&& !philo[i].is_eating)
 			{
 				print_philo(&philo[i], DIE);
 				pthread_mutex_lock(&args->lock);
